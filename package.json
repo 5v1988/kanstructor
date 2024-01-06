@@ -1,0 +1,18 @@
+{
+  "name": "ts-verifier-app",
+  "version": "1.0.0",
+  "description": "Quick test app",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx ts-node src/lib/main.ts"
+  },
+  "author": "Veera",
+  "license": "ISC",
+  "dependencies": {
+    "@playwright/test": "^1.40.1",
+    "playwright-core": "^1.40.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3",
+    "yaml": "^2.3.4"
+  }
+}

@@ -1,0 +1,72 @@
+tests:
+  - name: Login success
+    browser: chrome
+
+    arrange:
+      - name: open_url
+        base_url: https://dashboard-qa.ninjavan.co/v2/login
+
+    act:
+      - name: username
+        locator: "[name='email']"
+        action: type
+        pause: 3
+        value: dashqaauto.mailbox@gmail.com
+
+      - name: password
+        locator: "[name='password']"
+        action: type
+        value: Ninjitsu89
+
+      - name: login_button
+        locator: "//button[normalize-space()='Login']"
+        action: click
+
+    assert:
+      - name: login_success
+        type: element
+        locator: "a[href*='home']"
+        state: visible
+        screenshot_path: "~/screenshot.png"
+
+      - name: home_screen
+        type: text
+        text: Got it!
+        state: visible
+
+  - name: Login failure
+    browser: chrome
+
+    arrange:
+      - name: open_url
+        base_url: https://dashboard-qa.ninjavan.co/v2/login
+
+    act:
+      - name: username
+        locator: "[name='email']"
+        action: type
+        pause: 3
+        value: dashqaauto.mailbox@gmail.com
+
+      - name: password
+        locator: "[name='password']"
+        action: type
+        value: Ninjitsu90
+
+      - name: login_button
+        locator: "//button[normalize-space()='Login']"
+        action: click
+
+      - name: login_page_error
+        action: snapshot
+        path: 'src/snapshots/login/login-fail.png'  
+
+    assert:
+      - name: login_fail
+        type: text
+        text: Wrong username or password
+        state: visible
+
+      # - name: login_fail_with_screenshot
+      #   type: snapshot
+      #   path: 'src/snapshots/login/login-fail.png'
