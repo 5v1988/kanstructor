@@ -1,5 +1,5 @@
 import { Page, expect } from "@playwright/test";
-import { Assert } from "./element";
+import { Assert } from "./types";
 
 export default class Asserter {
 
@@ -34,10 +34,12 @@ export default class Asserter {
                             break;
                     }
                     break;
+
                 case 'snapshot':
                     await expect(this.driver)
                         .toHaveScreenshot(assert.path);
                     break;
+
                 case 'text':
                     switch (assert.state) {
                         case 'visible':

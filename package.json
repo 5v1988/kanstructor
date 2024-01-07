@@ -1,7 +1,7 @@
 {
-  "name": "ts-verifier-app",
+  "name": "just-test-now",
   "version": "1.0.0",
-  "description": "Quick test app",
+  "description": "Just test now",
   "main": "index.js",
   "scripts": {
     "test": "npx ts-node src/lib/main.ts"

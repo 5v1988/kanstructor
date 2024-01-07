@@ -1,7 +1,5 @@
 import fs from 'fs'
 import yaml from 'yaml'
-import Arranger from '../core/arranger';
-import Actor from '../core/actor';
 import {
     Browser,
     BrowserContext,
@@ -9,11 +7,13 @@ import {
     chromium,
     devices
 } from '@playwright/test';
+import Arranger from '../core/arranger';
+import Actor from '../core/actor';
 import Asserter from '../core/asserter';
 
 async function main() {
 
-    const file = fs.readFileSync('src/paths/login-tests.yml', 'utf8')
+    const file = fs.readFileSync('src/tests/login-tests.yml', 'utf8')
     let { tests } = await yaml.parse(file);
     let browser: Browser = await chromium.launch({ headless: false });
     for (let test of tests) {

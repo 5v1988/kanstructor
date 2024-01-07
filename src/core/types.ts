@@ -12,7 +12,7 @@ export interface Test {
   }
   
   export interface Act {
-    id: string
+    name: string
     locator: string
     action: 'type' | 'click' | 'clear' | 'select' | 'snapshot'
     pause?: number
@@ -28,4 +28,3 @@ export interface Test {
     text: string
     path: string
   }
-  

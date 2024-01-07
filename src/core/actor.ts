@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import { Act } from "./element";
+import { Act } from "./types";
 
 export default class Actor {
     private acts: Act[]
