@@ -1,5 +1,7 @@
 export interface Test {
     name: string
+    browser: string
+    exclude: true
     arrange: Arrange[]
     act: Act[]
     assert: Assert[]
@@ -7,7 +9,6 @@ export interface Test {
   
   export interface Arrange {
     name: string
-    browser: string
     base_url: string
   }
   

@@ -1,6 +1,7 @@
 tests:
   - name: Login success
     browser: chrome
+    exclude: false
 
     arrange:
       - name: open_url
