@@ -1,6 +1,6 @@
 tests:
   - name: Login success
-    exclude: true
+    exclude: false
     browser: chrome
 
     arrange:
@@ -8,29 +8,29 @@ tests:
         base_url: https://dashboard-qa.ninjavan.co/v2/login
 
     act:
-      - name: username
-        locator: "[name='email']"
+      - name: enter_username
+        locator: login_email
         action: type
         pause: 3
         value: dashqaauto.mailbox@gmail.com
 
-      - name: password
-        locator: "[name='password']"
+      - name: enter_password
+        locator: login_password
         action: type
         value: Ninjitsu89
 
-      - name: login_button
-        locator: "//button[normalize-space()='Login']"
+      - name: press_login
+        locator: login_button
         action: click
 
     assert:
-      - name: login_success
+      - name: check_home_screen_logo
         type: element
-        locator: "a[href*='home']"
+        locator: home_logo
+        pause: 3
         state: visible
-        path: "~/screenshot.png"
 
-      - name: home_screen
+      - name: check_home_screen_modal
         type: text
         text: Got it!
         state: visible
@@ -48,18 +48,18 @@ tests:
         action: snapshot
         path: "src/snapshots/login/login-landing-original.png"
 
-      - name: username
-        locator: "[name='email']"
+      - name: enter_username
+        locator: login_email
         action: type
         value: account.mailbox@gmail.com
 
-      - name: password
-        locator: "[name='password']"
+      - name: enter_password
+        locator: login_password
         action: type
         value: Ninjitsu90
 
-      - name: login_button
-        locator: "//button[normalize-space()='Login']"
+      - name: press_login
+        locator: login_button
         action: click
 
       - name: take_login_error_screenshot
@@ -68,7 +68,7 @@ tests:
         path: "src/snapshots/login/login-fail-original.png"
 
     assert:
-      - name: login_fail
+      - name: check_login_fail
         type: text
         text: Wrong username or password
         state: visible
@@ -78,7 +78,7 @@ tests:
         original: "src/snapshots/login/login-landing-original.png"
         reference: "src/snapshots/login/login-landing-reference.png"
 
-      - name: login_fail_with_screenshot
+      - name: compare_login_fail_with_screenshot
         type: snapshot
         original: "src/snapshots/login/login-fail-original.png"
         reference: "src/snapshots/login/chrome-login-fail-reference.png"        

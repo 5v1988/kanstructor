@@ -11,6 +11,15 @@ export default class Asserter {
         this.driver = page;
     }
 
+    async transformLocators(locators: Map<string, string>) {
+        this.asserts.forEach(async assert => {
+            if (locators.has(assert.locator)) {
+                console.log(`=== Transforming locator ${assert.locator} with ${locators.get(assert.locator)} ===`);
+                assert.locator = locators.get(assert.locator)!;
+            }
+        });
+    }
+
     async assert() {
         for (let assert of this.asserts) {
             switch (assert.type) {

@@ -1,3 +1,4 @@
 browser: chrome
+device:
 base_url: https://dashboard-qa.ninjavan.co/v2/login
 default_wait_seconds: 5

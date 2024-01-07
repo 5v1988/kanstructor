@@ -11,14 +11,23 @@ export default class Actor {
         this.driver = page;
     }
 
+    async transformLocators(locators: Map<string, string>) {
+        this.acts.forEach(async act => {
+            if (locators.has(act.locator)) {
+                console.log(`=== Transforming locator ${act.locator} with ${locators.get(act.locator)} ===`);
+                act.locator = locators.get(act.locator)!;
+            }
+        });
+    }
+
     async act() {
         for (let act of this.acts) {
-            if (act.pause){
-                console.log(`|<<<| Pausing for ${act.pause} seconds |<<<|`);
+            if (act.pause) {
+                console.log(`=== Pausing for ${act.pause} seconds ===`);
                 await delay(act.pause);
-                console.log('|>>>| Resuming after pausing |>>>|');
+                console.log('===  Resuming after pausing ===');
             }
-                
+
             switch (act.action) {
                 case 'type':
                     await this.driver.locator(act.locator).fill(act.value);
