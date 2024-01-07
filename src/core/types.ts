@@ -1,7 +1,7 @@
 export interface Test {
     name: string
     browser: string
-    exclude: true
+    exclude: boolean
     arrange: Arrange[]
     act: Act[]
     assert: Assert[]
@@ -25,7 +25,8 @@ export interface Test {
     name: string
     type: 'element' | 'snapshot' | 'text'
     locator: string
-    state: 'visible' | 'invisible' | 'enable' | 'disable'
+    state: 'visible' | 'invisible' | 'enable' | 'disable' | 'containText'
     text: string
-    path: string
+    original: string
+    reference: string
   }

@@ -11,6 +11,7 @@
   "dependencies": {
     "@playwright/test": "^1.40.1",
     "glob": "^10.3.10",
+    "looks-same": "^9.0.0",
     "playwright-core": "^1.40.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3",

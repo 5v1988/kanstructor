@@ -1,0 +1,25 @@
+tests:
+  - name: Test dropdown selection
+    exclude: true
+    browser: chrome
+
+    arrange:
+      - name: open_url
+        base_url: https://the-internet.herokuapp.com/
+
+    act:
+      - name: dropdown_link
+        locator: "//a[text()='Dropdown']"
+        action: click
+
+      - name: choose_dropdown
+        locator: "#dropdown"
+        action: select
+        value: Option 2
+
+    assert:
+      - name: verify_selection
+        type: element
+        locator: "//option[@selected]"
+        state: containText
+        text: Option 2

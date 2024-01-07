@@ -1,0 +1,2 @@
+### Login page elements' xpath and css
+forgot_your_password: //a[normalize-space()='Forgot Your Password?']

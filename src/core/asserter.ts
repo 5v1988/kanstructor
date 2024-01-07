@@ -1,6 +1,6 @@
 import { Page, expect } from "@playwright/test";
 import { Assert } from "./types";
-
+import compareImage from 'looks-same';
 export default class Asserter {
 
     private asserts: Assert[]
@@ -32,12 +32,16 @@ export default class Asserter {
                             await expect(this.driver.locator(assert.locator))
                                 .toBeDisabled();
                             break;
+                        case 'containText':
+                            await expect(this.driver.locator(assert.locator))
+                                .toContainText(assert.text);
+                            break;
                     }
                     break;
 
                 case 'snapshot':
-                    await expect(this.driver)
-                        .toHaveScreenshot(assert.path);
+                    let { equal } = await compareImage(assert.original, assert.reference);
+                    await expect(equal).toBeTruthy();
                     break;
 
                 case 'text':

@@ -14,10 +14,14 @@ import { glob } from 'glob';
 import { Test } from '../core/types';
 
 async function main() {
-    const pattern = '**/tests/**/*.{yaml,yml}';
+    const pattern = '**/tests/**/*test.{yaml,yml}';
     let browser: Browser = await chromium.launch({ headless: false });
     let tests: Test[] = await getTests(pattern);
     for (let test of tests) {
+        if (test.exclude) {
+            console.log(`Skiping the test: ${test.name}`)
+            continue;
+        }
         console.log(`Starting the test: ${test.name}`)
         let context: BrowserContext = await browser.newContext(devices['Desktop Chrome']);
         let pwPage: Page = await context.newPage();

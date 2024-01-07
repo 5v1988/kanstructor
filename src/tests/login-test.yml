@@ -1,7 +1,7 @@
 tests:
   - name: Login success
+    exclude: true
     browser: chrome
-    exclude: false
 
     arrange:
       - name: open_url
@@ -28,7 +28,7 @@ tests:
         type: element
         locator: "a[href*='home']"
         state: visible
-        screenshot_path: "~/screenshot.png"
+        path: "~/screenshot.png"
 
       - name: home_screen
         type: text
@@ -36,6 +36,7 @@ tests:
         state: visible
 
   - name: Login failure
+    exclude: false
     browser: chrome
 
     arrange:
@@ -43,11 +44,14 @@ tests:
         base_url: https://dashboard-qa.ninjavan.co/v2/login
 
     act:
+      - name: take_landing_page_screenshot
+        action: snapshot
+        path: "src/snapshots/login/login-landing-original.png"
+
       - name: username
         locator: "[name='email']"
         action: type
-        pause: 3
-        value: dashqaauto.mailbox@gmail.com
+        value: account.mailbox@gmail.com
 
       - name: password
         locator: "[name='password']"
@@ -58,9 +62,10 @@ tests:
         locator: "//button[normalize-space()='Login']"
         action: click
 
-      - name: login_page_error
+      - name: take_login_error_screenshot
+        pause: 1
         action: snapshot
-        path: 'src/snapshots/login/login-fail.png'  
+        path: "src/snapshots/login/login-fail-original.png"
 
     assert:
       - name: login_fail
@@ -68,6 +73,12 @@ tests:
         text: Wrong username or password
         state: visible
 
-      # - name: login_fail_with_screenshot
-      #   type: snapshot
-      #   path: 'src/snapshots/login/login-fail.png'
+      - name: verify_landing_screenshot
+        type: snapshot
+        original: "src/snapshots/login/login-landing-original.png"
+        reference: "src/snapshots/login/login-landing-reference.png"
+
+      - name: login_fail_with_screenshot
+        type: snapshot
+        original: "src/snapshots/login/login-fail-original.png"
+        reference: "src/snapshots/login/chrome-login-fail-reference.png"        

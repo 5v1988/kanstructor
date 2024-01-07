@@ -1,5 +1,6 @@
 import { Page } from "@playwright/test";
 import { Act } from "./types";
+import { delay } from "../lib/util";
 
 export default class Actor {
     private acts: Act[]
@@ -12,6 +13,12 @@ export default class Actor {
 
     async act() {
         for (let act of this.acts) {
+            if (act.pause){
+                console.log(`|<<<| Pausing for ${act.pause} seconds |<<<|`);
+                await delay(act.pause);
+                console.log('|>>>| Resuming after pausing |>>>|');
+            }
+                
             switch (act.action) {
                 case 'type':
                     await this.driver.locator(act.locator).fill(act.value);
@@ -27,9 +34,11 @@ export default class Actor {
                         .selectOption({ label: act.value });
                     break;
                 case 'snapshot':
+                    await this.driver.waitForLoadState('networkidle');
+                    await delay(2);
                     await this.driver
                         .screenshot({ path: act.path, fullPage: true });
-                    break;    
+                    break;
             }
         }
     }
