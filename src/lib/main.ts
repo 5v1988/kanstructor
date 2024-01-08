@@ -1,67 +1,47 @@
-import fs from 'fs'
-import yaml from 'yaml'
 import {
-    Browser,
-    BrowserContext,
-    Page,
-    chromium,
-    devices
-} from '@playwright/test';
+    getTests,
+    getLocators,
+    getConfigurations,
+    getBrowserContext
+} from './helper';
+import { Page } from '@playwright/test';
 import Arranger from '../core/arranger';
 import Actor from '../core/actor';
 import Asserter from '../core/asserter';
-import { glob } from 'glob';
-import { Test } from '../core/types';
+import { Test } from '../core/types/test.types';
 
 async function main() {
     const suitePattern = '**/tests/**/*test.{yaml,yml}';
     const locatorPattern = '**/tests/**/*element.{yaml,yml}';
+    const configPath = 'src/tests/config/config.yaml';
     let tests: Test[] = await getTests(suitePattern);
     let locators = await getLocators(locatorPattern);
-    let browser: Browser = await chromium.launch({ headless: false });
+    let config = await getConfigurations(configPath);
+
     for (let test of tests) {
         if (test.exclude) {
             console.log(`Skiping the test: ${test.name}`);
             continue;
         }
         console.log(`=== Starting the test: ${test.name} ===`);
-        let context: BrowserContext = await browser.newContext(devices['Desktop Chrome']);
-        let pwPage: Page = await context.newPage();
+        let browserContext = await getBrowserContext(config);
+        let pwPage: Page = await browserContext.context.newPage();
         let arranger = new Arranger(pwPage, test.arrange);
         let actor = new Actor(pwPage, test.act);
         let asserter = new Asserter(pwPage, test.assert);
-        await arranger.arrange();
-        await actor.transformLocators(locators);
-        await actor.act();
-        await asserter.transformLocators(locators);
-        await asserter.assert();
-        await context.close();
-        console.log(`=== Finishing the test: ${test.name} ===`);
+        try {
+            await arranger.arrange();
+            await actor.transformLocators(locators);
+            await actor.act();
+            await asserter.transformLocators(locators);
+            await asserter.assert();
+            await browserContext.context.close();
+            await browserContext.browser!.close();
+            console.log(`=== Finishing the test: ${test.name} ===`);
+        } catch (error) {
+            console.log(`=== Finishing the test: ${test.name} with failure due to ${error} ===`);
+        }
     }
-    await browser.close();
-}
-
-let getTests = async (pattern: string): Promise<Test[]> => {
-    const paths = await glob(pattern);
-    let allTests: Test[] = [];
-    for (let path of paths) {
-        let file = fs.readFileSync(path, 'utf8');
-        let suite: { tests: Test[] } = await yaml.parse(file);
-        let { tests } = suite;
-        allTests.push(...tests);
-    }
-    return allTests;
-}
-
-let getLocators = async (pattern: string) => {
-    let consolidatedLocators = {};
-    const paths = await glob(pattern);
-    for (let path of paths) {
-        let file = fs.readFileSync(path, 'utf8');
-        let locators = await yaml.parse(file);
-        consolidatedLocators = { ...consolidatedLocators, ...locators };
-    }
-    return new Map<string, string>(Object.entries(consolidatedLocators));
 }
 
 main();

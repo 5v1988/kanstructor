@@ -1,7 +1,7 @@
 import {
     Page,
 } from "@playwright/test";
-import { Arrange } from "./types";
+import { Arrange } from "./types/test.types";
 
 export default class Arranger {
 

@@ -1,6 +1,6 @@
 import { Page } from "@playwright/test";
-import { Act } from "./types";
-import { delay } from "../lib/util";
+import { Act } from "./types/test.types";
+import { delay } from "../lib/utils";
 
 export default class Actor {
     private acts: Act[]

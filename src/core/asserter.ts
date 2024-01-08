@@ -1,5 +1,5 @@
 import { Page, expect } from "@playwright/test";
-import { Assert } from "./types";
+import { Assert } from "./types/test.types";
 import compareImage from 'looks-same';
 export default class Asserter {
 
