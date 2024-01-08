@@ -35,12 +35,12 @@ async function main() {
             await actor.act();
             await asserter.transformLocators(locators);
             await asserter.assert();
-            await browserContext.context.close();
-            await browserContext.browser!.close();
             console.log(`=== Finishing the test: ${test.name} ===`);
         } catch (error) {
             console.log(`=== Finishing the test: ${test.name} with failure due to ${error} ===`);
         }
+        await browserContext.context!.close();
+        await browserContext.browser!.close();
     }
 }
 
