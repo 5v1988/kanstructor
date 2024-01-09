@@ -34,8 +34,9 @@ export let getLocators = async (pattern: string) => {
     return new Map<string, string>(Object.entries(consolidatedLocators));
 };
 
-export let getConfigurations = async (path: string) => {
-    let file = fs.readFileSync(path, 'utf8');
+export let getConfigurations = async (pattern: string) => {
+    const path = await glob(pattern);
+    let file = fs.readFileSync(path[0], 'utf8');
     let config: TestConfig = await yaml.parse(file);
     return config;
 };

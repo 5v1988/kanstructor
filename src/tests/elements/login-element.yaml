@@ -1,7 +1,0 @@
-### Login page elements' xpath and css
-### locator keys on element files must be unique across a project
-login_email: "[name='email']"
-login_password: "[name='password']"
-login_button: "//button[normalize-space()='Login']"
-home_logo: "a[href*='home']"
-forgot_email: "[name='email']"

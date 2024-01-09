@@ -1,6 +1,6 @@
 tests:
   - name: Test dropdown selection
-    exclude: true
+    exclude: false
     browser: chrome
 
     arrange:

@@ -13,3 +13,7 @@
 — Locator transformers
 
 — Multiple browser support
+
+— Add Jest test
+
+— Add neccessary release dependencies
