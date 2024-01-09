@@ -1,9 +1,15 @@
 # Changelog
 
-## Features
+## [1.0.0] — (2024-01-09)
 
-### Lazy screenshot
+### Features Added
 
-### Test Configuration
+— Core implementation
 
-### Locator transformers
+— Lazy screenshot
+
+— Test Configuration
+
+— Locator transformers
+
+— Multiple browser support

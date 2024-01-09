@@ -2,10 +2,20 @@
   "name": "just-test-now",
   "version": "1.0.0",
   "description": "Just test now",
-  "main": "index.js",
+  "main": "src/lib/main.ts",
+  "type": "module",
   "scripts": {
     "test": "npx ts-node src/lib/main.ts"
   },
+  "keywords": [
+    "playwright",
+    "browser-testing",
+    "integration-testing",
+    "e2e-testing",
+    "automated-testing",
+    "regression-testing",
+    "visual-regression"
+  ],
   "author": "Veera",
   "license": "ISC",
   "dependencies": {

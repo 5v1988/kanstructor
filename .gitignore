@@ -1,2 +1,4 @@
 package-lock.json
 node_modules
+src/snapshots/
+src/.DS_Store
