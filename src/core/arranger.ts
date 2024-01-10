@@ -14,7 +14,7 @@ export default class Arranger {
     }
 
     async arrange() {
-        for (let arrange of this.arranges) {
+        for (const arrange of this.arranges) {
             switch (arrange.name) {
                 case 'open_url':
                     await this.driver.goto(arrange.base_url);

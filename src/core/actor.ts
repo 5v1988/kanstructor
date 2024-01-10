@@ -21,7 +21,7 @@ export default class Actor {
     }
 
     async act() {
-        for (let act of this.acts) {
+        for (const act of this.acts) {
             if (act.pause) {
                 console.log(`=== Pausing for ${act.pause} seconds ===`);
                 await delay(act.pause);

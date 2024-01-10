@@ -1,4 +1,5 @@
 ### Login page elements' xpath and css
 ### locator keys on element files must be unique across a project
 dropdown_link: "//a[text()='Dropdown']"
+dropdown: "#dropdown"
 selected_dropdown_opt: "//option[@selected]"

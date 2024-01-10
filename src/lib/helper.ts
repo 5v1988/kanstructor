@@ -11,37 +11,37 @@ import {
     webkit
 } from '@playwright/test';
 
-export let getTests = async (pattern: string): Promise<Test[]> => {
+export const getTests = async (pattern: string): Promise<Test[]> => {
     const paths = await glob(pattern);
-    let allTests: Test[] = [];
-    for (let path of paths) {
-        let file = fs.readFileSync(path, 'utf8');
-        let suite: { tests: Test[] } = await yaml.parse(file);
-        let { tests } = suite;
+    const allTests: Test[] = [];
+    for (const path of paths) {
+        const file = fs.readFileSync(path, 'utf8');
+        const suite: { tests: Test[] } = await yaml.parse(file);
+        const { tests } = suite;
         allTests.push(...tests);
     }
     return allTests;
 }
 
-export let getLocators = async (pattern: string) => {
+export const getLocators = async (pattern: string) => {
     let consolidatedLocators = {};
     const paths = await glob(pattern);
-    for (let path of paths) {
-        let file = fs.readFileSync(path, 'utf8');
-        let locators = await yaml.parse(file);
+    for (const path of paths) {
+        const file = fs.readFileSync(path, 'utf8');
+        const locators = await yaml.parse(file);
         consolidatedLocators = { ...consolidatedLocators, ...locators };
     }
     return new Map<string, string>(Object.entries(consolidatedLocators));
 };
 
-export let getConfigurations = async (pattern: string) => {
+export const getConfigurations = async (pattern: string) => {
     const path = await glob(pattern);
-    let file = fs.readFileSync(path[0], 'utf8');
-    let config: TestConfig = await yaml.parse(file);
+    const file = fs.readFileSync(path[0], 'utf8');
+    const config: TestConfig = await yaml.parse(file);
     return config;
 };
 
-export let getBrowserContext = async (config: TestConfig) => {
+export const getBrowserContext = async (config: TestConfig) => {
     let browser;
     switch (config.browser) {
         case 'chrome':
@@ -54,6 +54,6 @@ export let getBrowserContext = async (config: TestConfig) => {
             browser = await webkit.launch({ headless: config.headless });
             break;
     }
-    let context: BrowserContext = await browser!.newContext(devices[config.device]);
+    const context: BrowserContext = await browser!.newContext(devices[config.device]);
     return { browser, context };
 }

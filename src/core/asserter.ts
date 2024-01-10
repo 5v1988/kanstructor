@@ -21,7 +21,7 @@ export default class Asserter {
     }
 
     async assert() {
-        for (let assert of this.asserts) {
+        for (const assert of this.asserts) {
             switch (assert.type) {
                 case 'element':
                     switch (assert.state) {
@@ -49,8 +49,8 @@ export default class Asserter {
                     break;
 
                 case 'snapshot':
-                    let { equal } = await compareImage(assert.original, assert.reference);
-                    await expect(equal).toBeTruthy();
+                    const { equal } = await compareImage(assert.original, assert.reference);
+                    expect(equal).toBeTruthy();
                     break;
 
                 case 'text':

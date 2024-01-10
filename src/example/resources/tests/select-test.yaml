@@ -9,17 +9,17 @@ tests:
 
     act:
       - name: dropdown_link
-        locator: "//a[text()='Dropdown']"
+        locator: dropdown_link
         action: click
 
       - name: choose_dropdown
-        locator: "#dropdown"
+        locator: dropdown
         action: select
         value: Option 2
 
     assert:
       - name: verify_selection
         type: element
-        locator: "//option[@selected]"
+        locator: selected_dropdown_opt
         state: containText
         text: Option 2
