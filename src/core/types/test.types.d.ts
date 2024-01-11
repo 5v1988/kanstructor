@@ -15,7 +15,7 @@ export interface Test {
   export interface Act {
     name: string
     locator: string
-    action: 'type' | 'click' | 'clear' | 'select' | 'snapshot'
+    action: 'type' | 'click' | 'clear' | 'select' | 'snapshot' | 'save'
     pause?: number
     value: string
     path: string

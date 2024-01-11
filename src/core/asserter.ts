@@ -1,6 +1,8 @@
 import { Page, expect } from "@playwright/test";
 import { Assert } from "./types/test.types";
 import compareImage from 'looks-same';
+import chalk from 'chalk';
+
 export default class Asserter {
 
     private asserts: Assert[]
@@ -14,7 +16,8 @@ export default class Asserter {
     async transformLocators(locators: Map<string, string>) {
         this.asserts.forEach(async assert => {
             if (locators.has(assert.locator)) {
-                console.log(`=== Transforming locator ${assert.locator} with ${locators.get(assert.locator)} ===`);
+                console.log(chalk.green('Transforming locator: ', chalk.white.bgRed.bold('%s'), ' with ',
+                    chalk.white.bgRed.bold('%s')), assert.locator, locators.get(assert.locator));
                 assert.locator = locators.get(assert.locator)!;
             }
         });

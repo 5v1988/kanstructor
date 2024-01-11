@@ -8,6 +8,10 @@ tests:
         base_url: https://the-internet.herokuapp.com/
 
     act:
+      - name: get_current_page_content
+        action: save
+        path: src/contents
+
       - name: dropdown_link
         locator: dropdown_link
         action: click

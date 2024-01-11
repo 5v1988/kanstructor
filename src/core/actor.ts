@@ -1,6 +1,7 @@
 import { Page } from "@playwright/test";
 import { Act } from "./types/test.types";
 import { delay } from "../lib/utils";
+import chalk from 'chalk';
 
 export default class Actor {
     private acts: Act[]
@@ -14,7 +15,8 @@ export default class Actor {
     async transformLocators(locators: Map<string, string>) {
         this.acts.forEach(async act => {
             if (locators.has(act.locator)) {
-                console.log(`=== Transforming locator ${act.locator} with ${locators.get(act.locator)} ===`);
+                console.log(chalk.green('Transforming locator: ', chalk.white.bgRed.bold('%s'), ' with ',
+                    chalk.white.bgRed.bold('%s')), act.locator, locators.get(act.locator));
                 act.locator = locators.get(act.locator)!;
             }
         });
@@ -48,6 +50,13 @@ export default class Actor {
                     await this.driver
                         .screenshot({ path: act.path, fullPage: true });
                     break;
+                case 'save':
+                    let text = '';
+                    if(act.locator)
+                        text = await this.driver.locator(act.locator)
+                            .innerText();
+                    else
+                        text = await this.driver.content();            
             }
         }
     }
