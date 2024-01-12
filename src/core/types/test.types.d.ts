@@ -18,6 +18,7 @@ export interface Test {
     action: 'type' | 'click' | 'clear' | 'select' | 'snapshot' | 'save'
     pause?: number
     value: string
+    type?: 'textContents' | 'innerText' | 'innerHTML' 
     path: string
   }
   

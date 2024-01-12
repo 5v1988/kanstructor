@@ -8,9 +8,28 @@ tests:
         base_url: https://the-internet.herokuapp.com/
 
     act:
-      - name: get_current_page_content
+      - name: innerText
         action: save
-        path: src/contents
+        locator: '#content'
+        type: 'innerText' 
+        path: src/example/resources/extracted-contents/innerText.txt
+
+      - name: innerHTML
+        action: save
+        locator: '#content'
+        type: 'innerHTML' 
+        path: src/example/resources/extracted-contents/innerHTML.txt
+
+      - name: textContents
+        action: save
+        locator: '#content'
+        type: 'textContents' 
+        path: src/example/resources/extracted-contents/textContents.txt
+
+      - name: default-save
+        action: save
+        type: 'textContents' 
+        path: src/example/resources/extracted-content/contents.txt
 
       - name: dropdown_link
         locator: dropdown_link

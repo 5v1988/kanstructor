@@ -1,6 +1,6 @@
 import { Page } from "@playwright/test";
 import { Act } from "./types/test.types";
-import { delay } from "../lib/utils";
+import { delay, write } from "../lib/utils";
 import chalk from 'chalk';
 
 export default class Actor {
@@ -29,7 +29,8 @@ export default class Actor {
                 await delay(act.pause);
                 console.log('===  Resuming after pausing ===');
             }
-
+            await this.driver.waitForLoadState('networkidle');
+            
             switch (act.action) {
                 case 'type':
                     await this.driver.locator(act.locator).fill(act.value);
@@ -45,18 +46,25 @@ export default class Actor {
                         .selectOption({ label: act.value });
                     break;
                 case 'snapshot':
-                    await this.driver.waitForLoadState('networkidle');
                     await delay(2);
                     await this.driver
                         .screenshot({ path: act.path, fullPage: true });
                     break;
                 case 'save':
-                    let text = '';
-                    if(act.locator)
+                    let text = [];
+                    if (act.locator && act.type === 'innerText')
                         text = await this.driver.locator(act.locator)
-                            .innerText();
+                            .allInnerTexts();
+                    else if (act.locator && act.type === 'textContents')
+                        text = await this.driver.locator(act.locator)
+                            .allTextContents();
+                    else if (act.locator && act.type === 'innerHTML')
+                        text = Array.of(await this.driver.locator(act.locator)
+                            .innerHTML());
                     else
-                        text = await this.driver.content();            
+                        text = Array.of(await this.driver.content());
+                    write(act.path, text);
+                    break;
             }
         }
     }
