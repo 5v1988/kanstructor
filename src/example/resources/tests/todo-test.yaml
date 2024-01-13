@@ -1,0 +1,139 @@
+tests:
+  - name: Set and delete todo lists
+    exclude: false
+
+    arrange:
+      - name: open_url
+        base_url: base_url
+
+    act:
+      - name: enter_todo
+        locator: todo_name
+        action: type
+        value: The first todo item
+
+      - name: press_enter
+        pause: 1
+        action: press
+        value: Enter
+
+      - name: enter_todo
+        locator: todo_name
+        action: type
+        value: The second todo item
+
+      - name: press_enter
+        pause: 1
+        action: press
+        value: Enter
+
+      - name: enter_todo
+        locator: todo_name
+        action: type
+        value: The third todo item
+
+      - name: press_enter
+        pause: 1
+        action: press
+        value: Enter
+
+      - name: hover_to_the_first_item
+        locator: todo_label_1
+        action: hover
+
+      - name: delete_first_item
+        pause: 2
+        locator: todo_item_button_1
+        action: click
+
+      - name: hover_to_the_second_item
+        locator: todo_label_2
+        action: hover
+
+      - name: delete_second_item
+        pause: 2
+        locator: todo_item_button_2
+        action: click
+
+      - name: hover_to_the_third_item
+        locator: todo_label_3
+        action: hover
+
+      - name: delete_third_item
+        pause: 2
+        locator: todo_item_button_3
+        action: click        
+
+    assert:
+      - name: verify_selection
+        pause: 2
+        type: text
+        text: The first todo item
+        state: invisible
+
+      - name: verify_selection
+        pause: 2
+        type: text
+        text: The second todo item
+        state: invisible
+
+      - name: verify_selection
+        pause: 2
+        type: text
+        text: The third todo item
+        state: invisible
+       
+  - name: Test dropdown selection using repeats
+    exclude: true
+    repeat: 3
+
+    arrange:
+      - name: open_url
+        base_url: https://example.cypress.io/todo#/
+
+    act:
+      - name: enter_todo
+        locator: .new-todo
+        action: type
+        value: The first todo item
+
+      - name: press_enter
+        pause: 1
+        action: press
+        value: Enter
+
+      - name: enter_todo
+        locator: .new-todo
+        action: type
+        value: The second todo item
+
+      - name: press_enter
+        pause: 1
+        action: press
+        value: Enter
+
+      - name: enter_todo
+        locator: .new-todo
+        action: type
+        value: The third todo item
+
+      - name: press_enter
+        pause: 1
+        action: press
+        value: Enter
+
+      - name: hover_to_the_first_item
+        locator: "//div[normalize-space()='The first todo item']"
+        action: hover
+
+      - name: delete_first_item
+        pause: 2
+        locator: "//div[normalize-space()='The first todo item']//button"
+        action: click
+
+    assert:
+      - name: verify_selection
+        pause: 2
+        type: text
+        text: The first todo item
+        state: invisible

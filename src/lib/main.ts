@@ -32,7 +32,7 @@ export default async function main() {
         const actor = new Actor(pwPage, test.act);
         const asserter = new Asserter(pwPage, test.assert);
         try {
-            await arranger.arrange();
+            await arranger.arrange(config);
             await actor.transformLocators(locators);
             await actor.act();
             await asserter.transformLocators(locators);

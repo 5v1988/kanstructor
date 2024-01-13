@@ -1,6 +1,7 @@
 import fs from 'fs'
 import yaml from 'yaml'
 import { glob } from 'glob';
+import chalk from 'chalk';
 import { Test } from '../core/types/test.types';
 import { TestConfig } from '../core/types/config.types';
 import {
@@ -55,5 +56,7 @@ export const getBrowserContext = async (config: TestConfig) => {
             break;
     }
     const context: BrowserContext = await browser!.newContext(devices[config.device]);
+    console.log(chalk.green('Testing browser : ', chalk.bold('%s'), 'with emulation : ',
+        chalk.bold('%s')), config.browser, config.device);
     return { browser, context };
 }

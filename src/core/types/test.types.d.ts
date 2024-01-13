@@ -1,6 +1,5 @@
 export interface Test {
     name: string
-    browser: string
     exclude: boolean
     arrange: Arrange[]
     act: Act[]
@@ -15,7 +14,7 @@ export interface Test {
   export interface Act {
     name: string
     locator: string
-    action: 'type' | 'click' | 'clear' | 'select' | 'snapshot' | 'save'
+    action: 'type' | 'click' | 'press' | 'clear' | 'select' | 'snapshot' | 'save' | 'hover'
     pause?: number
     value: string
     type?: 'textContents' | 'innerText' | 'innerHTML' 
@@ -25,6 +24,7 @@ export interface Test {
   export interface Assert {
     name: string
     type: 'element' | 'snapshot' | 'text'
+    pause?: number
     locator: string
     state: 'visible' | 'invisible' | 'enable' | 'disable' | 'containText'
     text: string

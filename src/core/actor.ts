@@ -25,15 +25,20 @@ export default class Actor {
     async act() {
         for (const act of this.acts) {
             if (act.pause) {
-                console.log(`=== Pausing for ${act.pause} seconds ===`);
+                console.log(chalk.yellow('Pausing for ', chalk.bold('%s'), ' seconds'),
+                    act.pause);
                 await delay(act.pause);
-                console.log('===  Resuming after pausing ===');
+                console.log(chalk.green(' Resuming after pausing ', chalk.bold('%s'), ' seconds'),
+                    act.pause);
             }
             await this.driver.waitForLoadState('networkidle');
-            
+
             switch (act.action) {
                 case 'type':
                     await this.driver.locator(act.locator).fill(act.value);
+                    break;
+                case 'press':
+                    await this.driver.keyboard.press(act.value);
                     break;
                 case 'click':
                     await this.driver.locator(act.locator).click();
@@ -45,8 +50,11 @@ export default class Actor {
                     await this.driver.locator(act.locator)
                         .selectOption({ label: act.value });
                     break;
+                case 'hover':
+                    await this.driver.locator(act.locator).hover();
+                    break;
                 case 'snapshot':
-                    await delay(2);
+                    await delay(1);
                     await this.driver
                         .screenshot({ path: act.path, fullPage: true });
                     break;

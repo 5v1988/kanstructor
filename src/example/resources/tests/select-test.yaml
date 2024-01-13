@@ -1,7 +1,6 @@
 tests:
   - name: Test dropdown selection
-    exclude: false
-    browser: chrome
+    exclude: true
 
     arrange:
       - name: open_url

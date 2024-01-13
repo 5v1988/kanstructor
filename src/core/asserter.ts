@@ -2,6 +2,7 @@ import { Page, expect } from "@playwright/test";
 import { Assert } from "./types/test.types";
 import compareImage from 'looks-same';
 import chalk from 'chalk';
+import { delay } from "../lib/utils";
 
 export default class Asserter {
 
@@ -14,6 +15,8 @@ export default class Asserter {
     }
 
     async transformLocators(locators: Map<string, string>) {
+        if (!this.asserts)
+            return;
         this.asserts.forEach(async assert => {
             if (locators.has(assert.locator)) {
                 console.log(chalk.green('Transforming locator: ', chalk.white.bgRed.bold('%s'), ' with ',
@@ -24,7 +27,19 @@ export default class Asserter {
     }
 
     async assert() {
+        if (!this.asserts)
+            return;
+        
         for (const assert of this.asserts) {
+            if (assert.pause) {
+                console.log(chalk.yellow('Pausing for ', chalk.bold('%s'), ' seconds'),
+                    assert.pause);
+                await delay(assert.pause);
+                console.log(chalk.green(' Resuming after pausing ', chalk.bold('%s'), ' seconds'),
+                    assert.pause);
+            }
+            await this.driver.waitForLoadState('networkidle');
+            
             switch (assert.type) {
                 case 'element':
                     switch (assert.state) {

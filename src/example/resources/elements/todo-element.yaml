@@ -1,0 +1,9 @@
+### Login page elements' xpath and css
+### locator keys on element files must be unique across a project
+todo_name: .new-todo
+todo_label_1: "//div[normalize-space()='The first todo item']"
+todo_item_button_1: "//div[normalize-space()='The first todo item']//button"
+todo_label_2: "//div[normalize-space()='The second todo item']"
+todo_item_button_2: "//div[normalize-space()='The second todo item']//button"
+todo_label_3: "//div[normalize-space()='The third todo item']"
+todo_item_button_3: "//div[normalize-space()='The third todo item']//button"
