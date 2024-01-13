@@ -1,5 +1,5 @@
 tests:
-  - name: Test dropdown selection
+  - name: Extract contents using different ways
     exclude: true
 
     arrange:
@@ -8,27 +8,26 @@ tests:
 
     act:
       - name: innerText
-        action: save
+        action: extract
         locator: '#content'
-        type: 'innerText' 
+        extractType: 'innerText' 
         path: src/example/resources/extracted-contents/innerText.txt
 
       - name: innerHTML
-        action: save
+        action: extract
         locator: '#content'
-        type: 'innerHTML' 
+        extractType: 'innerHTML' 
         path: src/example/resources/extracted-contents/innerHTML.txt
 
       - name: textContents
-        action: save
+        action: extract
         locator: '#content'
-        type: 'textContents' 
+        extractType: 'textContents' 
         path: src/example/resources/extracted-contents/textContents.txt
 
       - name: default-save
-        action: save
-        type: 'textContents' 
-        path: src/example/resources/extracted-content/contents.txt
+        action: extract
+        path: src/example/resources/extracted-contents/contents.txt
 
       - name: dropdown_link
         locator: dropdown_link

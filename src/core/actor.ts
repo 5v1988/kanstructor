@@ -37,15 +37,27 @@ export default class Actor {
                 case 'type':
                     await this.driver.locator(act.locator).fill(act.value);
                     break;
+                case 'check':
+                    await this.driver.locator(act.locator).check();
+                    break;     
+                case 'uncheck':
+                    await this.driver.locator(act.locator).uncheck();
+                    break;                        
                 case 'press':
                     await this.driver.keyboard.press(act.value);
                     break;
                 case 'click':
                     await this.driver.locator(act.locator).click();
                     break;
+                case 'doubleclick':
+                    await this.driver.locator(act.locator).dblclick();
+                    break;                         
                 case 'clear':
                     await this.driver.locator(act.locator).clear();
                     break;
+                case 'focus':
+                    await this.driver.locator(act.locator).focus();
+                    break;                    
                 case 'select':
                     await this.driver.locator(act.locator)
                         .selectOption({ label: act.value });
@@ -57,22 +69,33 @@ export default class Actor {
                     await delay(1);
                     await this.driver
                         .screenshot({ path: act.path, fullPage: true });
-                    break;
-                case 'save':
+                    break;   
+                case 'extract':
                     let text = [];
-                    if (act.locator && act.type === 'innerText')
+                    if (act.locator && act.extractType === 'innerText')
                         text = await this.driver.locator(act.locator)
                             .allInnerTexts();
-                    else if (act.locator && act.type === 'textContents')
+                    else if (act.locator && act.extractType === 'textContents')
                         text = await this.driver.locator(act.locator)
                             .allTextContents();
-                    else if (act.locator && act.type === 'innerHTML')
+                    else if (act.locator && act.extractType === 'innerHTML')
                         text = Array.of(await this.driver.locator(act.locator)
                             .innerHTML());
                     else
                         text = Array.of(await this.driver.content());
+
                     write(act.path, text);
                     break;
+                case 'download':
+                    const downloadEvent = await this.driver.waitForEvent('download');
+                    await this.driver.locator(act.locator).click();
+                    await downloadEvent.saveAs(act.dir + downloadEvent.suggestedFilename());  
+                    break;
+                case 'upload':
+                    await this.driver.locator(act.locator).setInputFiles(act.path);
+                    break      
+                default:
+                    throw new Error(`No such action: '${act.action}'. Please check for typo.`);    
             }
         }
     }

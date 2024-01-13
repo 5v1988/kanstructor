@@ -51,14 +51,22 @@ export default class Asserter {
                             await expect(this.driver.locator(assert.locator))
                                 .toBeVisible({ visible: false });
                             break;
-                        case 'enable':
+                        case 'enabled':
                             await expect(this.driver.locator(assert.locator))
                                 .toBeEnabled();
                             break;
-                        case 'disable':
+                        case 'disabled':
                             await expect(this.driver.locator(assert.locator))
                                 .toBeDisabled();
                             break;
+                        case 'checked':
+                            await expect(this.driver.locator(assert.locator))
+                                .toBeChecked();
+                            break;
+                        case 'unchecked':
+                            await expect(this.driver.locator(assert.locator))
+                                .toBeChecked({checked: false});
+                            break;                
                         case 'containText':
                             await expect(this.driver.locator(assert.locator))
                                 .toContainText(assert.text);
@@ -82,6 +90,9 @@ export default class Asserter {
                                 .toBeVisible({ visible: false, timeout: 10000 });
                             break;
                     }
+                    break;
+                default:
+                    throw new Error(`No such assertion: '${assert.type}'. Please check for typo.`);     
             }
         }
     }

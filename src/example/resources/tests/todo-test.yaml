@@ -1,6 +1,6 @@
 tests:
   - name: Set and delete todo lists
-    exclude: false
+    exclude: true
 
     arrange:
       - name: open_url
@@ -83,7 +83,7 @@ tests:
         text: The third todo item
         state: invisible
        
-  - name: Test dropdown selection using repeats
+  - name: Set and delete todos using repeats
     exclude: true
     repeat: 3
 
@@ -93,7 +93,7 @@ tests:
 
     act:
       - name: enter_todo
-        locator: .new-todo
+        locator: todo_name
         action: type
         value: The first todo item
 
@@ -103,7 +103,7 @@ tests:
         value: Enter
 
       - name: enter_todo
-        locator: .new-todo
+        locator: todo_name
         action: type
         value: The second todo item
 
@@ -113,7 +113,7 @@ tests:
         value: Enter
 
       - name: enter_todo
-        locator: .new-todo
+        locator: todo_name
         action: type
         value: The third todo item
 
@@ -123,17 +123,47 @@ tests:
         value: Enter
 
       - name: hover_to_the_first_item
-        locator: "//div[normalize-space()='The first todo item']"
+        locator: todo_label_1
         action: hover
 
       - name: delete_first_item
         pause: 2
-        locator: "//div[normalize-space()='The first todo item']//button"
+        locator: todo_item_button_1
         action: click
+
+      - name: hover_to_the_second_item
+        locator: todo_label_2
+        action: hover
+
+      - name: delete_second_item
+        pause: 2
+        locator: todo_item_button_2
+        action: click
+
+      - name: hover_to_the_third_item
+        locator: todo_label_3
+        action: hover
+
+      - name: delete_third_item
+        pause: 2
+        locator: todo_item_button_3
+        action: click        
 
     assert:
       - name: verify_selection
         pause: 2
         type: text
         text: The first todo item
+        state: invisible
+
+      - name: verify_selection
+        pause: 2
+        type: text
+        text: The second todo item
+        state: invisible
+
+      - name: verify_selection
+        pause: 2
+        type: text
+        text: The third todo item
         state: invisible

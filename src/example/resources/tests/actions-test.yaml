@@ -1,0 +1,66 @@
+tests:
+  - name: Test checkbox
+    exclude: true
+
+    arrange:
+      - name: open_url
+        base_url: https://the-internet.herokuapp.com/
+
+    act:
+      - name: click_checkbox
+        locator: //a[text()='Checkboxes']  
+        action: click
+
+      - name: check_option
+        locator: //input[@type='checkbox'][last()]
+        action: check
+
+      - name: check_option
+        pause: 5
+        locator: //input[@type='checkbox'][last()]
+        action: uncheck
+
+      - name: check_option
+        pause: 5
+        locator: //input[@type='checkbox'][last()]
+        action: check
+
+      - name: check_option
+        pause: 5
+        locator: //input[@type='checkbox'][last()]
+        action: uncheck   
+
+    assert:
+      - name: verify_checked_state
+        type: element
+        locator: //input[@type='checkbox'][last()]
+        state: unchecked
+
+  - name: Test download
+    exclude: false
+
+    arrange:
+      - name: open_url
+        base_url: https://the-internet.herokuapp.com/
+
+    act:
+      - name: click_upload
+        locator: a[href$='upload']
+        action: click
+
+      - name: upload_image
+        locator: '#file-upload'
+        action: upload
+        path: src/example/resources/extracted-contents/innerText.txt
+
+      - name: press_upload_image
+        pause: 5
+        locator: '#file-submit'
+        action: click
+
+    assert:
+      - name: verify_upload
+        type: text
+        text: innerText.txt
+        state: 'visible'
+         
