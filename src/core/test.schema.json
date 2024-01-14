@@ -1,0 +1,154 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated schema for Root",
+  "type": "object",
+  "properties": {
+    "tests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "default": "Describe your test name here"
+          },
+          "exclude": {
+            "type": "boolean",
+            "default": false
+          },
+          "arrange": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "default": "Add your arrange name here"
+                },
+                "base_url": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "base_url"
+              ]
+            }
+          },
+          "act": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "default": "Add your action name here"
+                },
+                "action": {
+                  "type": "string",
+                  "enum": [
+                    "type",
+                    "check",
+                    "uncheck",
+                    "click",
+                    "doubleclick",
+                    "press",
+                    "clear",
+                    "select",
+                    "snapshot",
+                    "extract",
+                    "hover",
+                    "focus",
+                    "upload",
+                    "download"
+                  ]
+                },
+                "pause": {
+                  "type": "number",
+                  "default": 0
+                },
+                "locator": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "extractType": {
+                  "type": "string",
+                  "enum": [
+                    "textContents",
+                    "innerText",
+                    "innerHTML"
+                  ]
+                },
+                "dir": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "action"
+              ]
+            }
+          },
+          "assert": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "default": "Add your assertion name"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "element",
+                    "snapshot",
+                    "text"
+                  ]
+                },
+                "locator": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string",
+                  "enum": [
+                    "visible",
+                    "invisible",
+                    "enabled",
+                    "disabled",
+                    "checked",
+                    "unchecked",
+                    "containText"
+                  ]
+                },
+                "text": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "type",
+                "state"
+              ]
+            }
+          }
+        },
+        "required": [
+          "name",
+          "exclude",
+          "arrange",
+          "act",
+          "assert"
+        ]
+      }
+    }
+  },
+  "required": [
+    "tests"
+  ]
+}

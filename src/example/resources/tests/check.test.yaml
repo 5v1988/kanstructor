@@ -1,0 +1,14 @@
+tests:
+  - name: Describe your test name here
+    exclude: false
+    arrange:
+      - name: Add your arrange name here
+        base_url: ''
+    act:
+      - name: Add your action name here
+        action: type
+        pause: 0
+    assert:
+      - name: Add your assertion name
+        type: text
+        state: visible

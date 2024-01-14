@@ -13,9 +13,9 @@ export interface Arrange {
 
 export interface Act {
   name: string
-  locator: string
   action: 'type' | 'check' | 'uncheck' | 'click' | 'doubleclick' | 'press' |'clear' | 'select' | 'snapshot' | 'extract' | 'hover' | 'focus' | 'upload' | 'download'
   pause?: number
+  locator: string
   value: string
   extractType?: 'textContents' | 'innerText' | 'innerHTML'
   dir: string
