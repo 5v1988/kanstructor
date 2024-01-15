@@ -1,5 +1,5 @@
 browser: chrome
 headless: false
 device: Desktop Chrome
-base_url: https://example.cypress.io/todo#/
-default_wait_seconds: 5
+baseUrl: https://example.cypress.io/todo#/
+defaultWaitSeconds: 5

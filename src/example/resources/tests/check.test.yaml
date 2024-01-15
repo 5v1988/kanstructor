@@ -1,13 +1,13 @@
 tests:
   - name: Describe your test name here
-    exclude: false
+    exclude: true
     arrange:
       - name: Add your arrange name here
-        base_url: ''
+        baseUrl: ''
     act:
       - name: Add your action name here
-        action: type
         pause: 0
+        refId: -1
     assert:
       - name: Add your assertion name
         type: text

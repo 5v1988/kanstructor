@@ -18,9 +18,9 @@ export default class Arranger {
         for (const arrange of this.arranges) {
             switch (arrange.name) {
                 case 'open_url':
-                    if (arrange.base_url === 'base_url')
-                        arrange.base_url = config.base_url;
-                    await this.driver.goto(arrange.base_url);
+                    if (arrange.baseUrl === 'baseUrl')
+                        arrange.baseUrl = config.baseUrl;
+                    await this.driver.goto(arrange.baseUrl);
                     break;
             }
         }

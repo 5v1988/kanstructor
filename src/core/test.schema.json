@@ -25,13 +25,13 @@
                   "type": "string",
                   "default": "Add your arrange name here"
                 },
-                "base_url": {
+                "baseUrl": {
                   "type": "string"
                 }
               },
               "required": [
                 "name",
-                "base_url"
+                "baseUrl"
               ]
             }
           },
@@ -88,9 +88,19 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "name",
-                "action"
+              "oneOf": [
+                {
+                  "required": [
+                    "name",
+                    "refId"
+                  ]
+                },
+                {
+                  "required": [
+                    "name",
+                    "action"
+                  ]
+                }
               ]
             }
           },

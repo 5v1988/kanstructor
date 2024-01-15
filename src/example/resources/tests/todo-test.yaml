@@ -4,7 +4,7 @@ tests:
 
     arrange:
       - name: open_url
-        base_url: base_url
+        baseUrl: baseUrl
 
     act:
       - name: enter_todo
@@ -89,7 +89,7 @@ tests:
 
     arrange:
       - name: open_url
-        base_url: https://example.cypress.io/todo#/
+        baseUrl: https://example.cypress.io/todo#/
 
     act:
       - name: enter_todo

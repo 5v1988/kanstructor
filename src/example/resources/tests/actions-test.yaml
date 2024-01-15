@@ -1,10 +1,10 @@
 tests:
   - name: Test checkbox
-    exclude: true
+    exclude: false
 
     arrange:
       - name: open_url
-        base_url: https://the-internet.herokuapp.com/
+        baseUrl: https://the-internet.herokuapp.com/
 
     act:
       - name: click_checkbox
@@ -36,12 +36,12 @@ tests:
         locator: //input[@type='checkbox'][last()]
         state: unchecked
 
-  - name: Test download
+  - name: Test upload
     exclude: false
 
     arrange:
       - name: open_url
-        base_url: https://the-internet.herokuapp.com/
+        baseUrl: https://the-internet.herokuapp.com/
 
     act:
       - name: click_upload

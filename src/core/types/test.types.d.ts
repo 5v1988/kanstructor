@@ -8,7 +8,7 @@ export interface Test {
 
 export interface Arrange {
   name: string
-  base_url: string
+  baseUrl: string
 }
 
 export interface Act {
