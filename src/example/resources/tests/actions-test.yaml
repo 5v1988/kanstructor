@@ -12,32 +12,38 @@ tests:
         action: click
 
       - name: check_option
+        id: 1
         locator: //input[@type='checkbox'][last()]
         action: check
 
       - name: check_option
-        pause: 5
+        pause: 2
         locator: //input[@type='checkbox'][last()]
         action: uncheck
 
       - name: check_option
-        pause: 5
-        locator: //input[@type='checkbox'][last()]
-        action: check
+        refId: 1
 
       - name: check_option
-        pause: 5
+        pause: 2
         locator: //input[@type='checkbox'][last()]
         action: uncheck   
 
+      - name: check_option
+        refId: 1
+
     assert:
       - name: verify_checked_state
+        id: 1
         type: element
         locator: //input[@type='checkbox'][last()]
-        state: unchecked
+        state: checked
+
+      - name: verify_visible_state
+        refId: 1
 
   - name: Test upload
-    exclude: false
+    exclude: true
 
     arrange:
       - name: open_url
@@ -58,6 +64,9 @@ tests:
         locator: '#file-submit'
         action: click
 
+      - name: check_option
+        refId: 1
+        
     assert:
       - name: verify_upload
         type: text

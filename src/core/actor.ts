@@ -32,7 +32,8 @@ export default class Actor {
                     act.pause);
             }
             await this.driver.waitForLoadState('networkidle');
-
+            console.log(chalk.green(' Performing the act : ', chalk.bold.bgYellow.white('%s')),
+                    act.name);
             switch (act.action) {
                 case 'type':
                     await this.driver.locator(act.locator).fill(act.value);

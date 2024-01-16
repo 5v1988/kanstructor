@@ -93,6 +93,7 @@ tests:
 
     act:
       - name: enter_todo
+        id: 2
         locator: todo_name
         action: type
         value: The first todo item

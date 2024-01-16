@@ -2,13 +2,14 @@ import {
     getTests,
     getLocators,
     getConfigurations,
-    getBrowserContext
+    getBrowserContext,
+    getTransformedTests
 } from './helper';
 import { Page } from '@playwright/test';
 import Arranger from '../core/arranger';
 import Actor from '../core/actor';
 import Asserter from '../core/asserter';
-import { Test } from '../core/types/test.types';
+import { Act, Test } from '../core/types/test.types';
 import chalk from 'chalk';
 
 export default async function main() {
@@ -19,8 +20,9 @@ export default async function main() {
     const tests: Test[] = await getTests(suitePattern);
     const locators = await getLocators(locatorPattern);
     const config = await getConfigurations(configPath);
+    const tTests = await getTransformedTests(tests);
 
-    for (const test of tests) {
+    for (const test of tTests) {
         if (test.exclude) {
             log(chalk.yellow('Skiping the test: ', chalk.bold('%s')), test.name);
             continue;

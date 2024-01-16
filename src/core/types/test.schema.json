@@ -44,6 +44,12 @@
                   "type": "string",
                   "default": "Add your action name here"
                 },
+                "id": {
+                  "type": "number"
+                },
+                "refId": {
+                  "type": "number"
+                },
                 "action": {
                   "type": "string",
                   "enum": [
@@ -92,13 +98,13 @@
                 {
                   "required": [
                     "name",
-                    "refId"
+                    "action"
                   ]
                 },
                 {
                   "required": [
                     "name",
-                    "action"
+                    "refId"
                   ]
                 }
               ]
@@ -112,6 +118,12 @@
                 "name": {
                   "type": "string",
                   "default": "Add your assertion name"
+                },
+                "id": {
+                  "type": "number"
+                },
+                "refId": {
+                  "type": "number"
                 },
                 "type": {
                   "type": "string",
@@ -140,10 +152,20 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "name",
-                "type",
-                "state"
+              "oneOf": [
+                {
+                  "required": [
+                    "name",
+                    "type",
+                    "state"
+                  ]
+                },
+                {
+                  "required": [
+                    "name",
+                    "refId"
+                  ]
+                }
               ]
             }
           }

@@ -1,0 +1,37 @@
+tests:
+  - name: Test checkbox
+    exclude: false
+
+    arrange:
+      - name: open_url
+        baseUrl: https://the-internet.herokuapp.com/
+
+    act:
+      - name: click_checkbox
+        locator: //a[text()='Checkboxes']  
+        action: click
+
+      - name: check_option
+        id: 1
+        locator: //input[@type='checkbox'][last()]
+        action: check
+
+      - name: check_option
+        pause: 2
+        locator: //input[@type='checkbox'][last()]
+        action: uncheck
+
+      - name: check_option
+        refId: 1
+
+      - name: check_option
+        pause: 2
+        locator: //input[@type='checkbox'][last()]
+        action: uncheck   
+
+      - name: check_option
+        refId: 1
+
+    assert:
+      - name: Add your assertion name
+        refId: 2

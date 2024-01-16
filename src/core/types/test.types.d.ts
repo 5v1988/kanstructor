@@ -13,6 +13,8 @@ export interface Arrange {
 
 export interface Act {
   name: string
+  id: number
+  refId: number
   action: 'type' | 'check' | 'uncheck' | 'click' | 'doubleclick' | 'press' |'clear' | 'select' | 'snapshot' | 'extract' | 'hover' | 'focus' | 'upload' | 'download'
   pause?: number
   locator: string
@@ -24,6 +26,8 @@ export interface Act {
 
 export interface Assert {
   name: string
+  id: number
+  refId: number
   type: 'element' | 'snapshot' | 'text'
   pause?: number
   locator: string
