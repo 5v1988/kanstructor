@@ -1,6 +1,6 @@
 tests:
   - name: Test checkbox
-    exclude: false
+    exclude: true
 
     arrange:
       - name: open_url

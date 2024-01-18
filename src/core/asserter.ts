@@ -31,6 +31,8 @@ export default class Asserter {
             return;
         
         for (const assert of this.asserts) {
+            console.log(chalk.green(' Performing the assert : ', chalk.bold.bgYellow.white('%s')),
+                assert.name);
             if (assert.pause) {
                 console.log(chalk.yellow('Pausing for ', chalk.bold('%s'), ' seconds'),
                     assert.pause);
@@ -39,8 +41,6 @@ export default class Asserter {
                     assert.pause);
             }
             await this.driver.waitForLoadState('networkidle');
-            console.log(chalk.green(' Performing the assert : ', chalk.bold.bgYellow.white('%s')),
-                assert.name);
             switch (assert.type) {
                 case 'element':
                     switch (assert.state) {

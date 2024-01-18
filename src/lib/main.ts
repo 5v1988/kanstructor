@@ -2,14 +2,15 @@ import {
     getTests,
     getLocators,
     getConfigurations,
-    getBrowserContext,
     getTransformedTests
-} from './helper';
+} from './common.helper';
+import { getBrowserContext, tidyUpBrowserStuffs } from './browser.helper';
+
 import { Page } from '@playwright/test';
 import Arranger from '../core/arranger';
 import Actor from '../core/actor';
 import Asserter from '../core/asserter';
-import { Act, Test } from '../core/types/test.types';
+import { Test } from '../core/types/test.types';
 import chalk from 'chalk';
 
 export default async function main() {
@@ -44,7 +45,6 @@ export default async function main() {
             log(chalk.red('Finishing the test: ', chalk.bold(' %s'), ' with failure due to %s'),
                 test.name, error);
         }
-        await browserContext.context!.close();
-        await browserContext.browser!.close();
+        tidyUpBrowserStuffs();
     }
 }

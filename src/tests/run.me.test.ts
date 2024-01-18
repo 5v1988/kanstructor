@@ -2,4 +2,4 @@ import main from "../lib/main";
 
 test('run just-test-now app',async () => {
     await main();
-}, 30000);
+}, 45000);

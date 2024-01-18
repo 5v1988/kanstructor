@@ -1,5 +1,5 @@
 tests:
-  - name: Test checkbox
+  - name: Test checkbox using schema format
     exclude: false
 
     arrange:
