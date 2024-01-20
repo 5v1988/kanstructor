@@ -42,11 +42,11 @@ npx playwright install
 
 	```yaml
 		### Login page elements' xpath and css
+
 		login_email: "[name='email']"
 		login_password: "[name='password']"
 		login_button: "//button[normalize-space()='Login']"
 		home_logo: "a[href*='home']"
-		...
 	```
 
 - **Step 4** : The next step is, folders `extracted-contents` and `snapshots` need to be created to save all contents extracted during testing to external files and to keep golden copies of screenshots that will be verified against app under tests during testing respectively.
@@ -59,7 +59,6 @@ npx playwright install
 		headless: false
 		device: Desktop Chrome
 		baseUrl: https://github.com/5v1988/dancing-yaml
-		...
 	```
 Once all the above steps are done, the typical project is expected to be in the below structure.
 
@@ -82,7 +81,7 @@ Once all the above steps are done, the typical project is expected to be in the 
 
 ## Write Tests
 
- — Tests to be written in Yaml files A.K.A test files. Each of these tests will have the format: `Arrange-Act-Assert`
+ — Tests using this library need to be written in Yaml files, otherwise known as test files. Each of these tests should have to be written following the format: `Arrange-Act-Assert`
 
  ```yaml
  tests:
@@ -114,5 +113,8 @@ Once all the above steps are done, the typical project is expected to be in the 
         state: enabled
  ```
 
- — A test file can contain more than one tests, however our recommendation is to have a few of them, organised by some commonalities
+ — A test file can have more than one tests, however our recommendation is to have a few of them, organised by some commonalities
+
  — A test folder `tests` can contain several test files; No limits
+
+— The high-level blocks — Arrange, Act and Assert, contain a sequence of steps to perform certain actions during testing.  
