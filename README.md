@@ -22,7 +22,7 @@ npm init
 npm install dancing-yaml
 ```
 
-**IMPORTANT:** Remember to install node and npm as a pre-requisite before setting up the project using this package [For more info.](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+**IMPORTANT:** Remember to install `node` and `npm` as pre-requisites before setting up the project using this package [For more info.](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 
 Also, this package transtively depends on Playwright, it's required to install browsers needed for Playwright using this command below.
@@ -51,7 +51,7 @@ npx playwright install
 
 - **Step 4** : The next step is, folders `extracted-contents` and `snapshots` need to be created to save all contents extracted during testing to external files and to keep golden copies of screenshots that will be verified against app under tests during testing respectively.
 
-- **Step 5** : Lastly, one config folder will be created to have all configurations one may want to have before running tests. The following snippet shows some example configs.
+- **Step 5** : All common configurations such as browser, env etc will have to be in the file: `config.yaml` under `config` folder. The following snippet shows some examples.
 
 
 	```yaml
@@ -60,23 +60,32 @@ npx playwright install
 		device: Desktop Chrome
 		baseUrl: https://github.com/5v1988/dancing-yaml
 	```
-Once all the above steps are done, the typical project is expected to be in the below structure.
+— **Step 6** : Lastly, to run all tests, the test runner `runMe.js` needs to be created in the project as follows:
+
+  ```js
+    import runMe from 'dancing-yaml'
+    runMe();
+  ```
+By the way, the runner file name and method name can be named anything as you like. Once all the above steps are done, the typical project is expected to be in the below structure.
 
 
 ```sh
 .
-├── node_modules
-├── package-lock.json
-├── package.json
-└── resources
-    ├── config
-    │   └── config.yaml
-    ├── elements
-    │   └── forgot-password-element.yaml
-    ├── extracted-contents
-    ├── snapshots
-    └── tests
-        └── forgot-password-test.yaml
+└── src
+    ├── node_modules
+    ├── package-lock.json
+    ├── package.json
+    ├── resources
+    │   ├── config
+    │   │   └── config.yaml
+    │   ├── elements
+    │   │   └── forgot-password-element.yaml
+    │   ├── extracted-contents
+    │   ├── snapshots
+    │   └── tests
+    │       └── forgot-password-test.yaml
+    └── runMe.js
+
 ```
 
 ## Write Tests
@@ -113,8 +122,186 @@ Once all the above steps are done, the typical project is expected to be in the 
         state: enabled
  ```
 
- — A test file can have more than one tests, however our recommendation is to have a few of them, organised by some commonalities
+ — A test file can have more than one test, however, our recommendation is to have a few of them, organized by some commonalities
 
  — A test folder `tests` can contain several test files; No limits
 
-— The high-level blocks — Arrange, Act and Assert, contain a sequence of steps to perform certain actions during testing.  
+— The high-level blocks — Arrange, Act and Assert, contain a sequence of steps to perform certain actions during testing.
+
+### Act Reference
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Required Key</th>
+    <th>Example</th>
+  </tr>
+  <tr>
+    <td>type</td>
+    <td>Enter characters into textboxes</td>
+    <td>Required — <br>
+      name,<br>
+      action,<br>
+      locator,<br>
+      value <br>
+      Optional — <br>
+      pause
+    </td>
+    <td>name: Type in username <br>
+        action: type  <br>
+        locator: "input[name='email']"  <br>
+        value: 5v1988@gmail.com
+    </td>
+  </tr>
+  <tr>
+    <td>check, <br>
+      uncheck
+    </td>
+    <td>Check (or Uncheck) radio button/checkbox</td>
+    <td>Required — <br>
+      name,<br>
+      action,<br>
+      locator,<br>
+      Optional — <br>
+      pause
+    </td>
+    <td>name: Type in username <br>
+        action: check  <br>
+        locator: "input[type='checkbox']"<br>
+    </td>  
+  </tr>
+  <tr>
+    <td>click, <br>
+      doubleclick, <br>
+    </td>
+    <td>Click (or Doubleclick) button/link</td>
+    <td>Required — <br>
+      name,<br>
+      action,<br>
+      locator,<br>
+      Optional — <br>
+      pause
+    </td>
+    <td>name: Type in username <br>
+        action: click <br>
+        locator: '#file-submit'
+    </td>  
+  </tr>
+  <tr>
+    <td>select</td>
+    <td>Select a dropdown value</td>
+    <td>Required — <br>
+      name,<br>
+      action,<br>
+      locator,<br>
+      value <br>
+      Optional — <br>
+      pause
+    </td>
+    <td>name: choose_dropdown <br>
+        locator: "#dropdown" <br>
+        action: select <br>
+        value: Option 2
+    </td>  
+  </tr>
+  <tr>
+    <td>press</td>
+    <td>Simulate a key press</td>
+    <td>Required — <br>
+      name,<br>
+      action,<br>
+      value <br>
+      Optional — <br>
+      pause
+    </td>
+    <td>
+      name: Press enter <br>
+      action: press <br>
+      value: Enter
+    </td>  
+  </tr>
+  <tr>
+    <td>clear, <br>
+        focus, <br>
+        hover<br>
+      </td>
+    <td>Clear (or focus or hover) on html element</td>
+    <td>Required — <br>
+      name,<br>
+      action,<br>
+      locator <br>
+      Optional — <br>
+      pause
+    </td>
+    <td>
+      name: hover over the login link <br>
+      locator: "//button[normalize-space()='Login']" <br>
+      action: hover <br>
+    </td>  
+  </tr>    
+  <tr>
+    <td>snapshot</td>
+    <td>Take a screenshot of a current window</td>
+    <td>Required — <br>
+      name,<br>
+      action,<br>
+      path <br>
+      Optional — <br>
+      pause
+    </td>
+    <td>
+      name: Take screenshot of login failure <br>
+      pause: 1 <br>
+      action: snapshot <br>
+      path: "src/snapshots/login-fail-original.png" <br>
+    </td>  
+  </tr>
+  <tr>
+    <td>upload</td>
+    <td>Upload a file to the app</td>
+    <td>Required — <br>
+      name,<br>
+      action,<br>
+      locator <br>
+      path <br>     
+      Optional — <br>
+      pause
+    </td>
+    <td>
+      name: Upload an image <br>
+      action: upload <br>
+      locator: '#file-upload' <br>
+      path: src/example/innerText.txt <br>
+    </td>  
+  </tr>  
+  <tr>
+    <td>extract</td>
+    <td>
+      Extract a text contents from the current window <br>
+      By default, Page source of the current window will be extracted <br>
+      Locator must also be given only if `extractType` is given
+    </td>
+    <td>Required — <br>
+      name,<br>
+      action,<br>
+      path <br>
+      Optional — <br>
+      locator <br>
+      extractType — textContents, innerText, innerHTML <br> 
+      pause
+    </td>
+    <td>
+      name: Extract text contents from a form <br>
+      action: extract <br>
+      path: "src/extracted-contents/form.txt" <br>
+      locator: "form#customer" <br>
+      extractType: innerText <br>
+    </td>  
+  </tr>  
+</table>
+
+
+
+Thanks,
+Veera.
