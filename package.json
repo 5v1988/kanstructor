@@ -13,13 +13,13 @@
     "test": "jest"
   },
   "keywords": [
-    "playwright",
-    "browser-testing",
-    "integration-testing",
-    "e2e-testing",
+    "qa",
+    "testing",
     "automated-testing",
-    "regression-testing",
-    "visual-regression"
+    "visual-testing",
+    "integration-tests",
+    "e2e",
+    "playwright"
   ],
   "author": "Veera",
   "repository": {

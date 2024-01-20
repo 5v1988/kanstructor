@@ -7,7 +7,7 @@ export interface Test {
 }
 
 export interface Arrange {
-  name: string
+  name: 'baseUrl'
   baseUrl: string
 }
 

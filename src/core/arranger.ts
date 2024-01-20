@@ -17,7 +17,7 @@ export default class Arranger {
     async arrange(config: TestConfig) {
         for (const arrange of this.arranges) {
             switch (arrange.name) {
-                case 'open_url':
+                case 'baseUrl':
                     if (arrange.baseUrl === 'baseUrl')
                         arrange.baseUrl = config.baseUrl;
                     await this.driver.goto(arrange.baseUrl);

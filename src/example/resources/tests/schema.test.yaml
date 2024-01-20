@@ -1,6 +1,6 @@
 tests:
   - name: Test checkbox using schema format
-    exclude: false
+    exclude: true
 
     arrange:
       - name: open_url

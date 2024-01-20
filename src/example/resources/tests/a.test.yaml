@@ -1,0 +1,26 @@
+tests:
+  - name: Check Log In button state
+    exclude: true
+
+    arrange:
+      - name: baseUrl
+        baseUrl: https://giphy.com/login
+
+    act:
+      - name: Type in username
+        action: type
+        locator: "input[name='email']"
+        value: 5v1988@gmail.com
+
+      - name: Type in password
+        action: type
+        locator: "input[name='password']"
+        pause: 3
+        value: Test12345#
+
+    assert:
+      - name: Verify 'Log In' enabled
+        type: element
+        pause: 1
+        locator: "//form//button[normalize-space()='Log In']"
+        state: enabled
