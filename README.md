@@ -173,7 +173,7 @@ By the way, the runner file name and method name can be named anything as you li
   </tr>
   <tr>
     <td>click, <br>
-      doubleclick, <br>
+      doubleclick <br>
     </td>
     <td>Click (or Doubleclick) button/link</td>
     <td>Required — <br>
