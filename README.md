@@ -1,6 +1,6 @@
 <h1 align="center">
 	<br>
-	<img width="480" src="media/dy-logo.svg" alt="Dancing-Yaml">
+	<img width="480" src="src/media/dy-logo.svg" alt="Dancing-Yaml">
 	<br>
 	<br>
 </h1>
@@ -23,7 +23,7 @@ npm init
 npm install dancing-yaml
 ```
 
-**IMPORTANT:** Remember to install `node` and `npm` as pre-requisites before setting up the project using this package [For more info.](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+**IMPORTANT:** Remember to install `node` and `npm` as pre-requisites before setting up the project using this package [Refer here for more info.](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 
 Also, this package transtively depends on Playwright, it's required to install browsers needed for Playwright using this command below.
@@ -33,7 +33,7 @@ Also, this package transtively depends on Playwright, it's required to install b
 npx playwright install
 ```
 
-## Basic Setup
+## Quick Start
 
 - **Step 1** : Create `resources` folder which is going to be a root directory for all testing stuff
 
@@ -68,7 +68,7 @@ npx playwright install
     import runMe from 'dancing-yaml'
     runMe();
   ```
-By the way, the runner file name and method name can be named anything as you like. Once all the above steps are done, the typical project is expected to be in the below structure.
+Not necessarily that the method name must always be `runMe`; The below is the sample structure once all setup is complete.
 
 
 ```sh
