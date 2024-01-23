@@ -18,6 +18,7 @@
 ## Installation
 
 ```sh
+mkdir test-project && cd test-project #create and change to project dir
 npm init
 npm install dancing-yaml
 ```
@@ -60,6 +61,7 @@ npx playwright install
 		device: Desktop Chrome
 		url: https://github.com/5v1988/dancing-yaml
 	```
+
 — **Step 6** : Lastly, to run all tests, the test runner `runMe.js` needs to be created in the project as follows:
 
   ```js
@@ -409,6 +411,3 @@ By the way, the runner file name and method name can be named anything as you li
 ## Support
 
 ## License
-
-Thanks,
-Veera.
