@@ -36,7 +36,7 @@ npx playwright install
 
 - **Step 1** : Create `resources` folder which is going to be a root directory for all testing stuff
 
-- **Step 2** : Under `resources` folder, let's create `tests` folder which will contain test files in a plain YAML format. Note that, this package `dancing-yaml` identifies a file as a test file only if it ends in `*test.yaml`. For how to write tests?
+- **Step 2** : Under `resources` folder, let's create `tests` folder which will contain test files in a plain YAML format. Note that, this package `dancing-yaml` identifies a file as a test file only if it ends in `*test.yaml`. [More on how to write tests?](#write-tests)
 
 - **Step 3** : Many a times, `CSS` and `XPath` values used to identify html elements will be used in several places across test files. To keep all such values in centralized place, the folder `elements` needs to be created within `resources`. Just like test files, the element files need to be ending in `*element.yaml` The following snippet shows some example element yaml.
 
@@ -58,7 +58,7 @@ npx playwright install
 		browser: chrome
 		headless: false
 		device: Desktop Chrome
-		baseUrl: https://github.com/5v1988/dancing-yaml
+		url: https://github.com/5v1988/dancing-yaml
 	```
 — **Step 6** : Lastly, to run all tests, the test runner `runMe.js` needs to be created in the project as follows:
 
@@ -90,7 +90,7 @@ By the way, the runner file name and method name can be named anything as you li
 
 ## Write Tests
 
- — Tests using this library need to be written in Yaml files, otherwise known as test files. Each of these tests should have to be written following the format: `Arrange-Act-Assert`
+ — Tests are expected to be written in Yaml files, otherwise known as test files while using this package. Each of these tests should have to be written using well known testing format: `Arrange-Act-Assert`
 
  ```yaml
  tests:
@@ -99,8 +99,8 @@ By the way, the runner file name and method name can be named anything as you li
     headless: false
 
     arrange:
-      - name: baseUrl
-        baseUrl: https://giphy.com/login
+      - name: openUrl
+        url: https://giphy.com/login
 
     act:
       - name: Type in username
@@ -128,13 +128,39 @@ By the way, the runner file name and method name can be named anything as you li
 
 — The high-level blocks — Arrange, Act and Assert, contain a sequence of steps to perform certain actions during testing.
 
-### Act Reference
+### Arrange Reference
 
 <table>
   <tr>
     <th>Name</th>
     <th>Description</th>
-    <th>Required Key</th>
+    <th>Keys</th>
+    <th>Example</th>
+  </tr>
+  <tr>
+    <td>openUrl</td>
+    <td>Open an app url in browser</td>
+    <td>Required — <br>
+      name,<br>
+      url<br>
+      Optional — <br>
+      pause
+    </td>
+    <td>
+      name: openUrl <br>
+      url: https://github.com/5v1988
+    </td>
+  </tr>
+</table>
+
+
+### Act Reference
+
+<table>
+  <tr>
+    <th>Action</th>
+    <th>Description</th>
+    <th>Keys</th>
     <th>Example</th>
   </tr>
   <tr>
@@ -302,6 +328,87 @@ By the way, the runner file name and method name can be named anything as you li
 </table>
 
 
+### Assert Reference
+
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Keys</th>
+    <th>Example</th>
+  </tr>
+  <tr>
+    <td>element</td>
+    <td>Assert the expectation by having element(s) on the page</td>
+    <td>Required — <br>
+      name,<br>
+      type,<br>
+      locator,<br>
+      state (Accepted values: visible, invisible, enabled, disabled, checked, unchecked, containText),<br>
+      text (Required only if state = containText)
+      Optional — <br>
+      pause
+    </td>
+    <td>
+      name: Verify dropdown selected
+      type: element
+      locator: "//option[@selected]"
+      state: containText
+      text: Option 2
+    </td>
+  </tr>
+  <tr>
+    <td>text</td>
+    <td>Verify if text displayed ( or not displayed)</td>
+    <td>Required — <br>
+      name,<br>
+      type,<br>
+      text,<br>
+      state (Accepted values: visible, invisible)
+      Optional — <br>
+      pause
+    </td>
+    <td>
+      name: verify_upload
+      type: text
+      text: innerText.txt
+      state: 'visible'
+    </td>
+  </tr>
+  <tr>
+    <td>snapshot</td>
+    <td>Compare the expected screenshot with the actual one on the current screen</td>
+    <td>Required — <br>
+      name,<br>
+      type,<br>
+      original,<br>
+      reference<br>
+      Optional — <br>
+      pause
+    </td>
+    <td>
+      name: Verify login failure screen
+      type: snapshot
+      original: "src/snapshots/login/login-fail-original.png"
+      reference: "src/snapshots/login/login-fail-chrome-reference.png"
+    </td>
+  </tr>
+<table>  
+
+
+## Roadmap
+
+— [X] Browser
+— [ ] Summary report
+— [ ] Parameterized tests
+— [ ] API
+— [ ] Mobile
+
+## Contribute
+
+## Support
+
+## License
 
 Thanks,
 Veera.

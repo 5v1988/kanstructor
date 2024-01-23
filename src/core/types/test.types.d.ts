@@ -7,8 +7,9 @@ export interface Test {
 }
 
 export interface Arrange {
-  name: 'baseUrl'
-  baseUrl: string
+  name: 'openUrl'
+  url: string
+  pause?: number
 }
 
 export interface Act {

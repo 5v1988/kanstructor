@@ -1,10 +1,10 @@
 tests:
   - name: Test checkbox
-    exclude: true
+    exclude: false
 
     arrange:
-      - name: open_url
-        baseUrl: https://the-internet.herokuapp.com/
+      - name: openUrl
+        url: https://the-internet.herokuapp.com/
 
     act:
       - name: click_checkbox

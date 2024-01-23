@@ -3,8 +3,8 @@ tests:
     exclude: true
 
     arrange:
-      - name: open_url
-        baseUrl: https://the-internet.herokuapp.com/
+      - name: openUrl
+        url: https://the-internet.herokuapp.com/
 
     act:
       - name: click_checkbox

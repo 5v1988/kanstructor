@@ -25,16 +25,20 @@
                   "type": "string",
                   "default": "Add your arrange name here",
                   "enum": [
-                    "baseUrl"
+                    "openUrl"
                   ]
                 },
-                "baseUrl": {
+                "url": {
                   "type": "string"
+                },
+                "pause": {
+                  "type": "number",
+                  "default": 0
                 }
               },
               "required": [
                 "name",
-                "baseUrl"
+                "url"
               ]
             }
           },

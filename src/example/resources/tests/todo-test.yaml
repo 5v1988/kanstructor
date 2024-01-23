@@ -3,8 +3,8 @@ tests:
     exclude: true
 
     arrange:
-      - name: open_url
-        baseUrl: baseUrl
+      - name: openUrl
+        url: baseUrl
 
     act:
       - name: enter_todo

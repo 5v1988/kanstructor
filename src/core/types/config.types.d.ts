@@ -2,7 +2,7 @@ export interface TestConfig {
     browser: 'chrome' | 'firefox' | 'webkit'
     headless: boolean
     device: string
-    baseUrl: string
+    url: string
     defaultWaitSeconds: number
   }
   
