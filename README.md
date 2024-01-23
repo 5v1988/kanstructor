@@ -398,11 +398,11 @@ By the way, the runner file name and method name can be named anything as you li
 
 ## Roadmap
 
-— [X] Browser
-— [ ] Summary report
-— [ ] Parameterized tests
-— [ ] API
-— [ ] Mobile
+— [X] Browser <br>
+— [O] Summary report <br>
+— [O] Parameterized tests <br>
+— [O] API <br>
+— [O] Mobile <br>
 
 ## Contribute
 
