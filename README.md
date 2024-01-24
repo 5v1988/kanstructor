@@ -421,8 +421,8 @@ Not necessarily that the method name must always be `runMe`; The below is the sa
       <pre lang="yaml">
         - name: Verify login failure screen
           type: snapshot
-          original: "src/snapshots/login/login-fail-original.png"
-          reference: "src/snapshots/login/login-fail-chrome-reference.png"
+          original: "path/to/screenshot.png"
+          reference: "path/to/reference.png"
       </pre>
     </td>
   </tr>
