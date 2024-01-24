@@ -140,7 +140,7 @@ Not necessarily that the method name must always be `runMe`; The below is the sa
     <th>Example</th>
   </tr>
   <tr>
-    <td>openUrl</td>
+    <td><pre>openUrl</pre></td>
     <td>Open an app url in browser</td>
     <td>Required — <br>
       name,<br>
@@ -149,8 +149,10 @@ Not necessarily that the method name must always be `runMe`; The below is the sa
       pause
     </td>
     <td>
-      name: openUrl <br>
-      url: https://github.com/5v1988
+      <pre lang="yaml">
+        - name: openUrl 
+          url: https://github.com/5v1988
+      </pre>  
     </td>
   </tr>
 </table>
