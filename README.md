@@ -68,7 +68,7 @@ npx playwright install
     import runMe from 'dancing-yaml'
     runMe();
   ```
-Not necessarily that the method name must always be `runMe`; The below is the sample structure once all setup is complete.
+Now execute tests using `node src/runMe.js` from command line. Note that, not necessarily that the runner method must always be named as `runMe`; The below is the sample structure once all setup is complete.
 
 
 ```sh
