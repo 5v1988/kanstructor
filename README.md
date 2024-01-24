@@ -168,7 +168,9 @@ Not necessarily that the method name must always be `runMe`; The below is the sa
     <th>Example</th>
   </tr>
   <tr>
-    <td><pre>type</pre></td>
+    <td>
+      <pre>type</pre>
+    </td>
     <td>Enter characters into textboxes</td>
     <td>Required — <br>
       name,<br>
@@ -189,10 +191,8 @@ Not necessarily that the method name must always be `runMe`; The below is the sa
   </tr>
   <tr>
     <td>
-      <pre>
         check,
         uncheck
-      </pre>  
     </td>
     <td>Check (or Uncheck) radio button/checkbox</td>
     <td>Required — <br>
