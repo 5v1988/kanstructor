@@ -222,9 +222,12 @@ Not necessarily that the method name must always be `runMe`; The below is the sa
       Optional — <br>
       pause
     </td>
-    <td>name: Type in username <br>
-        action: click <br>
-        locator: '#file-submit'
+    <td>
+      <pre lang="yaml">
+        - name: Type in username
+          action: click
+          locator: '#file-submit'
+      </pre>  
     </td>  
   </tr>
   <tr>
@@ -238,10 +241,13 @@ Not necessarily that the method name must always be `runMe`; The below is the sa
       Optional — <br>
       pause
     </td>
-    <td>name: choose_dropdown <br>
-        locator: "#dropdown" <br>
-        action: select <br>
-        value: Option 2
+    <td>
+      <pre lang="yaml">
+        - name: choose_dropdown
+          locator: "#dropdown"
+          action: select
+          value: Option 2
+      </pre>
     </td>  
   </tr>
   <tr>
@@ -255,9 +261,11 @@ Not necessarily that the method name must always be `runMe`; The below is the sa
       pause
     </td>
     <td>
-      name: Press enter <br>
-      action: press <br>
-      value: Enter
+      <pre lang="yaml">
+        - name: Press enter
+          action: press
+          value: Enter
+      </pre>
     </td>  
   </tr>
   <tr>
@@ -290,10 +298,12 @@ Not necessarily that the method name must always be `runMe`; The below is the sa
       pause
     </td>
     <td>
-      name: Take screenshot of login failure <br>
-      pause: 1 <br>
-      action: snapshot <br>
-      path: "src/snapshots/login-fail-original.png" <br>
+      <pre lang="yaml">
+        - name: Take screenshot of login failure
+          pause: 1
+          action: snapshot
+          path: "src/snapshots/login-fail-original.png"
+      </pre>
     </td>  
   </tr>
   <tr>
@@ -308,10 +318,12 @@ Not necessarily that the method name must always be `runMe`; The below is the sa
       pause
     </td>
     <td>
-      name: Upload an image <br>
-      action: upload <br>
-      locator: '#file-upload' <br>
-      path: src/example/innerText.txt <br>
+      <pre lang="yaml">
+        - name: Upload an image
+          action: upload
+          locator: '#file-upload'
+          path: src/example/innerText.txt
+      </pre>
     </td>  
   </tr>  
   <tr>
@@ -331,11 +343,13 @@ Not necessarily that the method name must always be `runMe`; The below is the sa
       pause
     </td>
     <td>
-      name: Extract text contents from a form <br>
-      action: extract <br>
-      path: "src/extracted-contents/form.txt" <br>
-      locator: "form#customer" <br>
-      extractType: innerText <br>
+      <pre lang="yaml">
+        - name: Extract text contents from a form
+          action: extract
+          path: "src/extracted-contents/form.txt"
+          locator: "form#customer"
+          extractType: innerText
+      </pre>
     </td>  
   </tr>  
 </table>
@@ -363,11 +377,13 @@ Not necessarily that the method name must always be `runMe`; The below is the sa
       pause
     </td>
     <td>
-      name: Verify dropdown selected
-      type: element
-      locator: "//option[@selected]"
-      state: containText
-      text: Option 2
+      <pre lang="yaml">
+        - name: Verify dropdown selected
+          type: element
+          locator: "//option[@selected]"
+          state: containText
+          text: Option 2
+      </pre>
     </td>
   </tr>
   <tr>
@@ -382,10 +398,12 @@ Not necessarily that the method name must always be `runMe`; The below is the sa
       pause
     </td>
     <td>
-      name: verify_upload
-      type: text
-      text: innerText.txt
-      state: 'visible'
+      <pre lang="yaml">
+        - name: verify_upload
+          type: text
+          text: innerText.txt
+          state: 'visible'
+      </pre>
     </td>
   </tr>
   <tr>
@@ -400,10 +418,12 @@ Not necessarily that the method name must always be `runMe`; The below is the sa
       pause
     </td>
     <td>
-      name: Verify login failure screen
-      type: snapshot
-      original: "src/snapshots/login/login-fail-original.png"
-      reference: "src/snapshots/login/login-fail-chrome-reference.png"
+      <pre lang="yaml">
+        - name: Verify login failure screen
+          type: snapshot
+          original: "src/snapshots/login/login-fail-original.png"
+          reference: "src/snapshots/login/login-fail-chrome-reference.png"
+      </pre>
     </td>
   </tr>
 <table>  
