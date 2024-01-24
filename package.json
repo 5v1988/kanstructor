@@ -1,6 +1,6 @@
 {
   "name": "dancing-yaml",
-  "version": "1.0.0-RC7",
+  "version": "1.0.0-RC8",
   "description": "An intuitively designed npm package for codeless automated testing",
   "main": "dist/main.js",
   "type": "module",
