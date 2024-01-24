@@ -168,7 +168,7 @@ Not necessarily that the method name must always be `runMe`; The below is the sa
     <th>Example</th>
   </tr>
   <tr>
-    <td>type</td>
+    <td><pre>type</pre></td>
     <td>Enter characters into textboxes</td>
     <td>Required — <br>
       name,<br>
@@ -178,15 +178,21 @@ Not necessarily that the method name must always be `runMe`; The below is the sa
       Optional — <br>
       pause
     </td>
-    <td>name: Type in username <br>
-        action: type  <br>
-        locator: "input[name='email']"  <br>
-        value: 5v1988@gmail.com
+    <td>
+      <pre lang="yaml">
+          - name: Type in username
+            action: type
+            locator: "input[name='email']"
+            value: 5v1988@gmail.com
+        </pre>
     </td>
   </tr>
   <tr>
-    <td>check, <br>
-      uncheck
+    <td>
+      <pre>
+        check,
+        uncheck
+      </pre>  
     </td>
     <td>Check (or Uncheck) radio button/checkbox</td>
     <td>Required — <br>
@@ -196,9 +202,12 @@ Not necessarily that the method name must always be `runMe`; The below is the sa
       Optional — <br>
       pause
     </td>
-    <td>name: Type in username <br>
-        action: check  <br>
-        locator: "input[type='checkbox']"<br>
+    <td>
+      <pre lang="yaml">
+        - name: Choose a gender
+          action: check
+          locator: "input[type='checkbox']"
+      <pre>    
     </td>  
   </tr>
   <tr>
