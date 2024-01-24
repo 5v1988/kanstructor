@@ -419,7 +419,7 @@ Not necessarily that the method name must always be `runMe`; The below is the sa
     </td>
     <td>
       <pre lang="yaml">
-        - name: Verify login failure screen
+        - name: Verify failure screen
           type: snapshot
           original: "path/to/screenshot.png"
           reference: "path/to/reference.png"
