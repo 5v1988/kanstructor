@@ -282,9 +282,11 @@ Not necessarily that the method name must always be `runMe`; The below is the sa
       pause
     </td>
     <td>
-      name: hover over the login link <br>
-      locator: "//button[normalize-space()='Login']" <br>
-      action: hover <br>
+      <pre lang="yaml">
+        - name: hover on the login link
+          locator: "//button[@id='login']"
+          action: hover
+      </pre>
     </td>  
   </tr>    
   <tr>
@@ -299,10 +301,10 @@ Not necessarily that the method name must always be `runMe`; The below is the sa
     </td>
     <td>
       <pre lang="yaml">
-        - name: Take screenshot of login failure
+        - name: Screenshot the login failure
           pause: 1
           action: snapshot
-          path: "src/snapshots/login-fail-original.png"
+          path: "path/to/save.png"
       </pre>
     </td>  
   </tr>
@@ -344,9 +346,9 @@ Not necessarily that the method name must always be `runMe`; The below is the sa
     </td>
     <td>
       <pre lang="yaml">
-        - name: Extract text contents from a form
+        - name: Extract form contents
           action: extract
-          path: "src/extracted-contents/form.txt"
+          path: "path/to/save.txt"
           locator: "form#customer"
           extractType: innerText
       </pre>
