@@ -12,6 +12,7 @@ import Actor from '../core/actor';
 import Asserter from '../core/asserter';
 import { Test } from '../core/types/test.types';
 import chalk from 'chalk';
+import { Element, Report } from '../core/types/report.types';
 
 export default async function main() {
     const log = console.log;
@@ -22,8 +23,21 @@ export default async function main() {
     const locators = await getLocators(locatorPattern);
     const config = await getConfigurations(configPath);
     const tTests = await getTransformedTests(tests);
+    let report: Report = {
+        name: 'This is a summary report',
+        id: '',
+        keyword: 'Suite',
+        uri: '',
+        elements: []
+    };
 
     for (const test of tTests) {
+        let testResult: Element = {
+            name: test.name,
+            id: test.name.replace(' ','-'),
+            keyword: 'Test',
+            steps: []
+        };
         if (test.exclude) {
             log(chalk.yellow('Skiping the test: ', chalk.bold('%s')), test.name);
             continue;
@@ -35,7 +49,9 @@ export default async function main() {
         const actor = new Actor(pwPage, test.act);
         const asserter = new Asserter(pwPage, test.assert);
         try {
-            await arranger.arrange(config);
+            let arrangeStepResults = await arranger.arrange(config);
+            console.log(arrangeStepResults);
+            testResult.steps.push(...arrangeStepResults);;
             await actor.transformLocators(locators);
             await actor.act();
             await asserter.transformLocators(locators);
@@ -46,5 +62,7 @@ export default async function main() {
                 test.name, error);
         }
         tidyUpBrowserStuffs();
+        report.elements.push(testResult);
+        console.log(report);
     }
 }

@@ -1,3 +1,4 @@
+description: Short description about the suite
 tests:
   - name: Test checkbox
     exclude: false
