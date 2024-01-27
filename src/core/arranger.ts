@@ -6,6 +6,7 @@ import { TestConfig } from "./types/config.types";
 import chalk from 'chalk';
 import { delay } from "../lib/utils";
 import { Step } from "./types/report.types";
+import YAML from 'json-to-pretty-yaml';
 
 export default class Arranger {
 
@@ -21,10 +22,10 @@ export default class Arranger {
         let results: Step[] = [];
         for (const arrange of this.arranges) {
             let result: Step = {
-                name: arrange,
-                keyword: 'Arrange —',
+                name: `— ${YAML.stringify(arrange)}`,
+                keyword: 'Arrange ',
                 result: {
-                    status: 'norun',
+                    status: 'undetermined',
                     duration: 0
                 }
             };
@@ -37,14 +38,18 @@ export default class Arranger {
                 console.log(chalk.green(' Resuming after pausing ', chalk.bold('%s'), ' seconds'),
                     arrange.pause);
             }
-            switch (arrange.name) {
-                case 'openUrl':
-                    if (arrange.url === 'url')
-                        arrange.url = config.url;
-                    await this.driver.goto(arrange.url);
-                    break;
+            try {
+                switch (arrange.name) {
+                    case 'openUrl':
+                        if (arrange.url === 'url')
+                            arrange.url = config.url;
+                        await this.driver.goto(arrange.url);
+                        break;
+                }
+                result.result.status = 'passed';
+            } catch (error) {
+                result.result.status = 'failed';
             }
-            result.result.status = 'pass';
             results.push(result)
         }
         return results;

@@ -1,0 +1,25 @@
+[
+    {
+        "name": "This is a summary report",
+        "id": "report",
+        "keyword": "Suite",
+        "uri": "",
+        "elements": [
+            {
+                "name": "Test checkbox",
+                "id": "Test-checkbox",
+                "keyword": "Test",
+                "steps": [
+                    {
+                        "name": "— name: \"openUrl\"\nurl: \"https://the-internet.herokuapp.com/\"\n",
+                        "keyword": "Arrange ",
+                        "result": {
+                            "status": "passed",
+                            "duration": 0
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -17,3 +17,7 @@ export const write = async (path: string, elements: string[]) => {
     console.log(chalk.green('Saved the page contents to the file: ',
         chalk.white.bgBlue.bold('%s')), path);
 }
+
+export const writeToJson = async (jsonObject: any) => {
+    fs.writeFileSync('results.json', JSON.stringify(jsonObject));
+}

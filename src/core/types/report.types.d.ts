@@ -14,12 +14,12 @@ export interface Element {
 }
 
 export interface Step {
-  keyword: 'Arrange —' | 'Act —' | 'Assert —'
+  keyword: 'Arrange ' | 'Act ' | 'Assert '
   name: Act | Arrange | Assert
   result: Result
 }
 
 export interface Result {
-  status: 'pass' | 'fail' | 'norun'
+  status: 'passed' | 'failed' | 'undetermined'
   duration: number
 }

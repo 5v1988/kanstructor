@@ -4,7 +4,10 @@ import {
     getConfigurations,
     getTransformedTests
 } from './common.helper';
-import { getBrowserContext, tidyUpBrowserStuffs } from './browser.helper';
+import {
+    getBrowserContext,
+    tidyUpBrowserStuffs
+} from './browser.helper';
 
 import { Page } from '@playwright/test';
 import Arranger from '../core/arranger';
@@ -13,6 +16,7 @@ import Asserter from '../core/asserter';
 import { Test } from '../core/types/test.types';
 import chalk from 'chalk';
 import { Element, Report } from '../core/types/report.types';
+import { writeToJson } from './utils';
 
 export default async function main() {
     const log = console.log;
@@ -25,7 +29,7 @@ export default async function main() {
     const tTests = await getTransformedTests(tests);
     let report: Report = {
         name: 'This is a summary report',
-        id: '',
+        id: 'report',
         keyword: 'Suite',
         uri: '',
         elements: []
@@ -34,7 +38,7 @@ export default async function main() {
     for (const test of tTests) {
         let testResult: Element = {
             name: test.name,
-            id: test.name.replace(' ','-'),
+            id: test.name.replace(' ', '-'),
             keyword: 'Test',
             steps: []
         };
@@ -63,6 +67,7 @@ export default async function main() {
         }
         tidyUpBrowserStuffs();
         report.elements.push(testResult);
-        console.log(report);
+        writeToJson(Array.of(report));
+        console.log(Array.of(report));
     }
 }
