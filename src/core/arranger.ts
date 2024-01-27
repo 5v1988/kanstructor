@@ -19,15 +19,20 @@ export default class Arranger {
     }
 
     async arrange(config: TestConfig): Promise<Step[]> {
-        let results: Step[] = [];
+        const startTime = new Date().getTime();
+        const results: Step[] = [];
         for (const arrange of this.arranges) {
-            let result: Step = {
-                name: `— ${YAML.stringify(arrange)}`,
+            const stepResult: Step = {
+                name: `— ${arrange.name}  `,
                 keyword: 'Arrange ',
                 result: {
                     status: 'undetermined',
                     duration: 0
-                }
+                },
+                embeddings: Array.of({
+                    data: YAML.stringify(arrange),
+                    mime_type: 'text/plain'
+                })
             };
             console.log(chalk.green(' Performing the arrangement : ', chalk.bold.bgYellow.white('%s')),
                 arrange.name);
@@ -46,11 +51,13 @@ export default class Arranger {
                         await this.driver.goto(arrange.url);
                         break;
                 }
-                result.result.status = 'passed';
+                stepResult.result.status = 'passed';
             } catch (error) {
-                result.result.status = 'failed';
+                stepResult.result.status = 'failed';
             }
-            results.push(result)
+            const elaspedTime = new Date().getTime() - startTime;
+            stepResult.result.duration = elaspedTime;
+            results.push(stepResult);
         }
         return results;
     }

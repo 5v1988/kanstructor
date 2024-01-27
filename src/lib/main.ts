@@ -27,7 +27,7 @@ export default async function main() {
     const locators = await getLocators(locatorPattern);
     const config = await getConfigurations(configPath);
     const tTests = await getTransformedTests(tests);
-    let report: Report = {
+    const report: Report = {
         name: 'This is a summary report',
         id: 'report',
         keyword: 'Suite',
@@ -36,7 +36,7 @@ export default async function main() {
     };
 
     for (const test of tTests) {
-        let testResult: Element = {
+        const testResult: Element = {
             name: test.name,
             id: test.name.replace(' ', '-'),
             keyword: 'Test',
@@ -53,21 +53,21 @@ export default async function main() {
         const actor = new Actor(pwPage, test.act);
         const asserter = new Asserter(pwPage, test.assert);
         try {
-            let arrangeStepResults = await arranger.arrange(config);
-            console.log(arrangeStepResults);
-            testResult.steps.push(...arrangeStepResults);;
+            const arrangeStepResults = await arranger.arrange(config);
+            testResult.steps.push(...arrangeStepResults);
             await actor.transformLocators(locators);
-            await actor.act();
+            const actStepResults = await actor.act();
+            testResult.steps.push(...actStepResults);
             await asserter.transformLocators(locators);
-            await asserter.assert();
+            const assertStepResults = await asserter.assert();
+            testResult.steps.push(...assertStepResults);
             log(chalk.green('Finishing the test: ', chalk.bold('%s')), test.name);
         } catch (error) {
             log(chalk.red('Finishing the test: ', chalk.bold(' %s'), ' with failure due to %s'),
                 test.name, error);
         }
-        tidyUpBrowserStuffs();
         report.elements.push(testResult);
         writeToJson(Array.of(report));
-        console.log(Array.of(report));
+        tidyUpBrowserStuffs();
     }
 }

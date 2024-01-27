@@ -5,7 +5,7 @@ tests:
 
     arrange:
       - name: openUrl
-        url: htps://the-internet.herokuapp.com/
+        url: https://the-internet.herokuapp.com/
 
     act:
       - name: click_checkbox
