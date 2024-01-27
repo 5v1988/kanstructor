@@ -1,0 +1,49 @@
+[
+  {
+    "id": "sign-in-scenarios",
+    "keyword": "Suite",
+    "name": "Sign In scenarios",
+    "elements": [
+      {
+        "id": "sign-in-scenarios;login-using-valid-creds",
+        "keyword": "Test",
+        "name": "Login using valid creds",
+        "steps": [
+          {
+            "keyword": "Arrange — ",
+            "name": "User opens home page",
+            "result": {
+              "status": "passed",
+              "duration": 3091951739
+            }
+          },
+          {
+            "keyword": "Act — ",
+            "name": "User navigates to sign-in page",
+            "result": {
+              "status": "passed",
+              "duration": 2372229821
+            }
+          },
+          {
+            "keyword": "Act — ",
+            "name": "User logons using credentials: 'ts.playwright@test.com' and 'Test1234#'",
+            "result": {
+              "status": "passed",
+              "duration": 3302536529
+            }
+          },
+          {
+            "keyword": "Assert — ",
+            "name": "User verifies that the login is successful",
+            "result": {
+              "status": "passed",
+              "duration": 3320464411
+            }
+          }
+        ],
+        "type": "scenario"
+      }
+    ]
+  }
+]

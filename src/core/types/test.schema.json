@@ -3,6 +3,10 @@
   "title": "Generated schema for Root",
   "type": "object",
   "properties": {
+    "description": {
+      "type": "string",
+      "default": "Brief description on what does test suite do"
+    },
     "tests": {
       "type": "array",
       "items": {
@@ -10,7 +14,11 @@
         "properties": {
           "name": {
             "type": "string",
-            "default": "Describe your test name here"
+            "default": "Short name about your test"
+          },
+          "description": {
+            "type": "string",
+            "default": "Brief description on what does this test do"
           },
           "exclude": {
             "type": "boolean",
@@ -188,6 +196,7 @@
     }
   },
   "required": [
-    "tests"
+    "tests",
+    "description"
   ]
 }

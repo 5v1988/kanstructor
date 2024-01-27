@@ -29,8 +29,11 @@
   "license": "ISC",
   "dependencies": {
     "@playwright/test": "^1.40.1",
+    "@types/cucumber-html-reporter": "^5.0.1",
     "chalk": "4.1.2",
+    "cucumber-html-reporter": "^7.1.1",
     "glob": "^10.3.10",
+    "json-to-pretty-yaml": "^1.2.2",
     "looks-same": "^9.0.0",
     "playwright-core": "^1.40.1",
     "typescript": "^5.3.3",
@@ -38,6 +41,7 @@
   },
   "devDependencies": {
     "@types/jest": "^29.5.11",
+    "@types/json-to-pretty-yaml": "^1.2.1",
     "@typescript-eslint/eslint-plugin": "^6.18.1",
     "@typescript-eslint/parser": "^6.18.1",
     "eslint": "^8.56.0",

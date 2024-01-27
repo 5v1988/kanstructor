@@ -1,5 +1,11 @@
 browser: chrome
 headless: false
+environment: qa
 device: Desktop Chrome
-baseUrl: https://example.cypress.io/todo#/
+url: https://example.cypress.io/todo#/
 defaultWaitSeconds: 5
+reportTheme: 'bootstrap'
+reportJson: 'results.json'
+reportPath: 'results.html'
+reportTitle: 'Test Summary Report'
+reportLaunch: true

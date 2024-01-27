@@ -1,5 +1,11 @@
+export interface Suite {
+  description: string,
+  tests: Test[]
+}
+
 export interface Test {
   name: string
+  description: string
   exclude: boolean
   arrange: Arrange[]
   act: Act[]
