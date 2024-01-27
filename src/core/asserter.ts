@@ -2,7 +2,7 @@ import { Page, expect } from "@playwright/test";
 import { Assert } from "./types/test.types";
 import compareImage from 'looks-same';
 import chalk from 'chalk';
-import { delay } from "../lib/utils";
+import { delay, readSnapshot } from "../lib/utils";
 import { Step } from "./types/report.types";
 import YAML from 'json-to-pretty-yaml';
 
@@ -30,12 +30,12 @@ export default class Asserter {
 
     async assert(): Promise<Step[]> {
         const startTime = new Date().getTime();
-        let results: Step[] = [];
+        const results: Step[] = [];
         if (!this.asserts)
             return [];
 
         for (const assert of this.asserts) {
-            let stepResult: Step = {
+            const stepResult: Step = {
                 name: `— ${assert.name}  `,
                 keyword: 'Assert ',
                 result: {
@@ -93,6 +93,11 @@ export default class Asserter {
                         break;
 
                     case 'snapshot':
+                        const original = await readSnapshot(assert.original);
+                        stepResult.embeddings!.push({
+                            data: original,
+                            mime_type: 'image/png'
+                        });
                         const { equal } = await compareImage(assert.original, assert.reference);
                         expect(equal).toBeTruthy();
                         break;

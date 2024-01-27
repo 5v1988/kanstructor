@@ -1,3 +1,4 @@
+description: Test to test test yaml schema
 tests:
   - name: Test checkbox using schema format
     exclude: true

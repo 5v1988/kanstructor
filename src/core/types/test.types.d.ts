@@ -1,6 +1,6 @@
 export interface Suite {
   description: string,
-  tests: test[]
+  tests: Test[]
 }
 
 export interface Test {

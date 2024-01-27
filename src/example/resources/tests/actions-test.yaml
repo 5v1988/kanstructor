@@ -1,7 +1,7 @@
-description: Short description about the suite
+description: Tests from sample site
 tests:
   - name: Test checkbox
-    exclude: false
+    exclude: true
     description: To verify the checkbox feature
     
     arrange:
@@ -50,7 +50,7 @@ tests:
         refId: 1
 
   - name: Test upload
-    exclude: false
+    exclude: true
 
     arrange:
       - name: openUrl

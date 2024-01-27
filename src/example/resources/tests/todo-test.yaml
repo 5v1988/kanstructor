@@ -1,10 +1,11 @@
+description: Some tests on cypress todo demo sites
 tests:
   - name: Set and delete todo lists
-    exclude: true
+    exclude: false
 
     arrange:
       - name: openUrl
-        url: baseUrl
+        url: url
 
     act:
       - name: enter_todo
@@ -62,7 +63,12 @@ tests:
       - name: delete_third_item
         pause: 2
         locator: todo_item_button_3
-        action: click        
+        action: click
+
+      - name: Screenshot after deleting item
+        pause: 1
+        action: snapshot
+        path: "src/example/resources/snapshots/original-screenshot.png"     
 
     assert:
       - name: verify_selection
@@ -83,13 +89,18 @@ tests:
         text: The third todo item
         state: invisible
        
+      - name: verify_snapshot_after_deleting
+        type: snapshot
+        original: "src/example/resources/snapshots/original-screenshot.png"
+        reference: "src/example/resources/snapshots/reference-screenshot.png"
+
   - name: Set and delete todos using repeats
     exclude: true
     repeat: 3
 
     arrange:
-      - name: open_url
-        baseUrl: https://example.cypress.io/todo#/
+      - name: openUrl
+        url: https://example.cypress.io/todo#/
 
     act:
       - name: enter_todo

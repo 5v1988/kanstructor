@@ -4,18 +4,19 @@ import { TestConfig } from '../core/types/config.types';
 import os from 'os';
 
 export default function generateReport(config: TestConfig) {
-    let options: reporter.Options = {
-        theme: 'bootstrap',
-        jsonFile: 'results.json',
-        output: 'results.html',
+    const options: reporter.Options = {
+        theme: config.reportTheme,
+        jsonFile: config.reportJson,
+        output: config.reportPath,
+        brandTitle: config.reportTitle,
+        launchReport: config.reportLaunch,
         reportSuiteAsScenarios: false,
         scenarioTimestamp: true,
-        launchReport: true,
         metadata: {
             'Version': '1.0.0',
             'Test Environment': config.environment,
             'Browser': config.browser,
-            'Headless': `${config.headless}`,
+            'Headless': config.headless ? 'Yes' : 'No',
             'Device': config.device,
             'Platform': os.platform(),
             'Executed On': 'Local',

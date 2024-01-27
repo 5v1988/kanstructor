@@ -1,15 +1,30 @@
 import fs from 'fs'
 import yaml from 'yaml'
 import { glob } from 'glob';
-import { Act, Assert, Test } from '../core/types/test.types';
+import { Act, Assert, Suite, Test } from '../core/types/test.types';
 import { TestConfig } from '../core/types/config.types';
 
+export const getSuites = async (pattern: string): Promise<Suite[]> => {
+    const paths = await glob(pattern);
+    const suites: Suite[] = [];
+    for (const path of paths) {
+        const file = fs.readFileSync(path, 'utf8');
+        const suite: Suite = await yaml.parse(file);
+        if (!suite)
+            continue;
+        suites.push(suite);
+    }
+    return suites;
+}
 export const getTests = async (pattern: string): Promise<Test[]> => {
     const paths = await glob(pattern);
     const allTests: Test[] = [];
     for (const path of paths) {
         const file = fs.readFileSync(path, 'utf8');
         const suite: { tests: Test[] } = await yaml.parse(file);
+        if (!suite) {
+            continue;
+        }
         const { tests } = suite;
         allTests.push(...tests);
     }
