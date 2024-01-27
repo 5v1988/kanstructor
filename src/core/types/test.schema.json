@@ -10,7 +10,11 @@
         "properties": {
           "name": {
             "type": "string",
-            "default": "Describe your test name here"
+            "default": "Short name about your test"
+          },
+          "description": {
+            "type": "string",
+            "default": "Brief description on what does your test name do"
           },
           "exclude": {
             "type": "boolean",

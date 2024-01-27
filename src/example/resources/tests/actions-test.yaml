@@ -2,7 +2,8 @@ description: Short description about the suite
 tests:
   - name: Test checkbox
     exclude: false
-
+    description: To verify the checkbox feature
+    
     arrange:
       - name: openUrl
         url: https://the-internet.herokuapp.com/
@@ -16,6 +17,11 @@ tests:
         id: 1
         locator: //input[@type='checkbox'][last()]
         action: check
+
+      - name: take_snapshot_state
+        pause: 1
+        action: snapshot
+        path: "src/example/resources/snapshots/take_snapshot_state.png"
 
       - name: check_option
         pause: 2
@@ -44,11 +50,11 @@ tests:
         refId: 1
 
   - name: Test upload
-    exclude: true
+    exclude: false
 
     arrange:
-      - name: open_url
-        baseUrl: https://the-internet.herokuapp.com/
+      - name: openUrl
+        url: https://the-internet.herokuapp.com/
 
     act:
       - name: click_upload

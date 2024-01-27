@@ -1,5 +1,6 @@
 browser: chrome
 headless: false
+environment: qa
 device: Desktop Chrome
 baseUrl: https://example.cypress.io/todo#/
 defaultWaitSeconds: 5

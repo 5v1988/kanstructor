@@ -17,6 +17,7 @@ import { Test } from '../core/types/test.types';
 import chalk from 'chalk';
 import { Element, Report } from '../core/types/report.types';
 import { writeToJson } from './utils';
+import generateReport from './report.generation';
 
 export default async function main() {
     const log = console.log;
@@ -37,9 +38,9 @@ export default async function main() {
 
     for (const test of tTests) {
         const testResult: Element = {
-            name: test.name,
+            name: test.description,
             id: test.name.replace(' ', '-'),
-            keyword: 'Test',
+            keyword: test.name,
             steps: []
         };
         if (test.exclude) {
@@ -67,7 +68,8 @@ export default async function main() {
                 test.name, error);
         }
         report.elements.push(testResult);
-        writeToJson(Array.of(report));
         tidyUpBrowserStuffs();
     }
+    writeToJson(Array.of(report));
+    generateReport(config);
 }

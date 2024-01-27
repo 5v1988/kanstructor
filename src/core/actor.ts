@@ -85,8 +85,12 @@ export default class Actor {
                         break;
                     case 'snapshot':
                         await delay(1);
-                        await this.driver
+                        const buffer = await this.driver
                             .screenshot({ path: act.path, fullPage: true });
+                        stepResult.embeddings!.push({
+                            data: buffer.toString('base64'),
+                            mime_type: 'image/png'
+                        });
                         break;
                     case 'extract':
                         let text = [];
@@ -101,8 +105,11 @@ export default class Actor {
                                 .innerHTML());
                         else
                             text = Array.of(await this.driver.content());
-
                         write(act.path, text);
+                        stepResult.embeddings!.push({
+                            data: text.join('\n'),
+                            mime_type: 'text/plain'
+                        });
                         break;
                     case 'download':
                         const downloadEvent = await this.driver.waitForEvent('download');

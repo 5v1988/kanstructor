@@ -8,7 +8,7 @@ export interface Report {
 
 export interface Element {
   id: string
-  keyword: 'Test'
+  keyword: string
   name: string
   steps: Step[]
 }
@@ -27,5 +27,5 @@ export interface Result {
 
 export interface Embedding {
   data: string
-  mime_type: 'base64:image/png' | 'text/plain'
+  mime_type: 'image/png' | 'text/plain'
 }
