@@ -5,7 +5,7 @@ device: Desktop Chrome
 url: https://example.cypress.io/todo#/
 defaultWaitSeconds: 5
 #Report related configurations
-reportTheme: 'simple'
+reportTheme: 'bootstrap'  # 'bootstrap' or 'simple' or 'foundation' or 'hierarchy'
 reportJson: 'src/example/resources/reports/results.json'
 reportPath: 'src/example/resources/reports/results.html'
 reportTitle: 'Test Summary Report'

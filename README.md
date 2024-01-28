@@ -95,33 +95,113 @@ Now execute tests using `node src/runMe.js` from command line. Note that, not ne
  — Tests are expected to be written in Yaml files, otherwise known as test files while using this package. Each of these tests should have to be written using well known testing format: `Arrange-Act-Assert`
 
  ```yaml
- tests:
-  - name: Check Log In button state
+
+description: Some tests on cypress todo demo site
+tests:
+  - name: Set and delete todo lists
     exclude: false
-    headless: false
 
     arrange:
       - name: openUrl
-        url: https://giphy.com/login
+        url: url
 
     act:
-      - name: Type in username
+      - name: Add the first item
+        locator: .new-todo
         action: type
-        locator: "input[name='email']"
-        value: 5v1988@gmail.com
+        value: Schedule doctor appointment
 
-      - name: Type in password
+      - name: Press Enter
+        pause: 1
+        action: press
+        value: Enter
+
+      - name: Add the second item
+        locator: .new-todo
         action: type
-        locator: "input[name='password']"
-        pause: 3
-        value: Test12345#
+        value: Prepare a blog content
+
+      - name: Press Enter
+        pause: 1
+        action: press
+        value: Enter
+
+      - name: Add the third item
+        locator: .new-todo
+        action: type
+        value: Fix the air conditioner
+
+      - name: Press Enter
+        pause: 1
+        action: press
+        value: Enter
+
+      - name: Screenshot after adding all items
+        pause: 1
+        action: snapshot
+        path: "src/example/resources/snapshots/original-screenshot-1.png"    
+
+      - name: Hover to the first item
+        locator: "//div[normalize-space()='Schedule doctor appointment']"
+        action: hover
+
+      - name: Delete the first item
+        pause: 2
+        locator: "//div[normalize-space()='Schedule doctor appointment']//button"
+        action: click
+
+      - name: Hover to the second item
+        locator: "//div[normalize-space()='Prepare a blog content']"
+        action: hover
+
+      - name: Delete the second item
+        pause: 2
+        locator: "//div[normalize-space()='Prepare a blog content']//button"
+        action: click
+
+      - name: Hover to the third item
+        locator: "//div[normalize-space()='Fix the air conditioner']"
+        action: hover
+
+      - name: Delete the third item
+        pause: 2
+        locator: "//div[normalize-space()='Fix the air conditioner']//button"
+        action: click
+
+      - name: Screenshot after deleting all items
+        pause: 1
+        action: snapshot
+        path: "src/example/resources/snapshots/original-screenshot-2.png"     
 
     assert:
-      - name: Verify 'Log In' enabled
-        type: element
-        pause: 1
-        locator: "//form//button[normalize-space()='Log In']"
-        state: enabled
+      - name: Verify if the first item deleted
+        pause: 2
+        type: text
+        text: Schedule doctor appointment
+        state: invisible
+
+      - name: Verify if the second item deleted
+        pause: 2
+        type: text
+        text: Prepare a blog content
+        state: invisible
+
+      - name: Verify if the third item deleted
+        pause: 2
+        type: text
+        text: Fix the air conditioner
+        state: invisible
+
+      - name: Compare screenshot after all items added
+        type: snapshot
+        original: "src/example/resources/snapshots/original-screenshot-1.png"
+        reference: "src/example/resources/snapshots/reference-screenshot-1.png"
+
+      - name: Compare screenshot after all items deleted
+        type: snapshot
+        original: "src/example/resources/snapshots/original-screenshot-2.png"
+        reference: "src/example/resources/snapshots/reference-screenshot-2.png"
+
  ```
 
  — A test file can have more than one test, however, our recommendation is to have a few of them, organized by some commonalities

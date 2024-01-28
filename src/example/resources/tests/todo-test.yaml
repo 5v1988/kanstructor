@@ -1,4 +1,4 @@
-description: Some tests on cypress todo demo sites
+description: Some tests on cypress todo demo site
 tests:
   - name: Set and delete todo lists
     exclude: false
@@ -8,174 +8,98 @@ tests:
         url: url
 
     act:
-      - name: enter_todo
-        locator: todo_name
+      - name: Add the first item
+        locator: .new-todo
         action: type
-        value: The first todo item
+        value: Schedule doctor appointment
 
-      - name: press_enter
+      - name: Press Enter
         pause: 1
         action: press
         value: Enter
 
-      - name: enter_todo
-        locator: todo_name
+      - name: Add the second item
+        locator: .new-todo
         action: type
-        value: The second todo item
+        value: Prepare a blog content
 
-      - name: press_enter
+      - name: Press Enter
         pause: 1
         action: press
         value: Enter
 
-      - name: enter_todo
-        locator: todo_name
+      - name: Add the third item
+        locator: .new-todo
         action: type
-        value: The third todo item
+        value: Fix the air conditioner
 
-      - name: press_enter
+      - name: Press Enter
         pause: 1
         action: press
         value: Enter
 
-      - name: hover_to_the_first_item
-        locator: todo_label_1
-        action: hover
-
-      - name: delete_first_item
-        pause: 2
-        locator: todo_item_button_1
-        action: click
-
-      - name: hover_to_the_second_item
-        locator: todo_label_2
-        action: hover
-
-      - name: delete_second_item
-        pause: 2
-        locator: todo_item_button_2
-        action: click
-
-      - name: hover_to_the_third_item
-        locator: todo_label_3
-        action: hover
-
-      - name: delete_third_item
-        pause: 2
-        locator: todo_item_button_3
-        action: click
-
-      - name: Screenshot after deleting item
+      - name: Screenshot after adding all items
         pause: 1
         action: snapshot
-        path: "src/example/resources/snapshots/original-screenshot.png"     
+        path: "src/example/resources/snapshots/original-screenshot-1.png"    
+
+      - name: Hover to the first item
+        locator: "//div[normalize-space()='Schedule doctor appointment']"
+        action: hover
+
+      - name: Delete the first item
+        pause: 2
+        locator: "//div[normalize-space()='Schedule doctor appointment']//button"
+        action: click
+
+      - name: Hover to the second item
+        locator: "//div[normalize-space()='Prepare a blog content']"
+        action: hover
+
+      - name: Delete the second item
+        pause: 2
+        locator: "//div[normalize-space()='Prepare a blog content']//button"
+        action: click
+
+      - name: Hover to the third item
+        locator: "//div[normalize-space()='Fix the air conditioner']"
+        action: hover
+
+      - name: Delete the third item
+        pause: 2
+        locator: "//div[normalize-space()='Fix the air conditioner']//button"
+        action: click
+
+      - name: Screenshot after deleting all items
+        pause: 1
+        action: snapshot
+        path: "src/example/resources/snapshots/original-screenshot-2.png"     
 
     assert:
-      - name: verify_selection
+      - name: Verify if the first item deleted
         pause: 2
         type: text
-        text: The first todo item
+        text: Schedule doctor appointment
         state: invisible
 
-      - name: verify_selection
+      - name: Verify if the second item deleted
         pause: 2
         type: text
-        text: The second todo item
+        text: Prepare a blog content
         state: invisible
 
-      - name: verify_selection
+      - name: Verify if the third item deleted
         pause: 2
         type: text
-        text: The third todo item
+        text: Fix the air conditioner
         state: invisible
-       
-      - name: verify_snapshot_after_deleting
+
+      - name: Compare screenshot after all items added
         type: snapshot
-        original: "src/example/resources/snapshots/original-screenshot.png"
-        reference: "src/example/resources/snapshots/reference-screenshot.png"
+        original: "src/example/resources/snapshots/original-screenshot-1.png"
+        reference: "src/example/resources/snapshots/reference-screenshot-1.png"
 
-  - name: Set and delete todos using repeats
-    exclude: true
-    repeat: 3
-
-    arrange:
-      - name: openUrl
-        url: https://example.cypress.io/todo#/
-
-    act:
-      - name: enter_todo
-        id: 2
-        locator: todo_name
-        action: type
-        value: The first todo item
-
-      - name: press_enter
-        pause: 1
-        action: press
-        value: Enter
-
-      - name: enter_todo
-        locator: todo_name
-        action: type
-        value: The second todo item
-
-      - name: press_enter
-        pause: 1
-        action: press
-        value: Enter
-
-      - name: enter_todo
-        locator: todo_name
-        action: type
-        value: The third todo item
-
-      - name: press_enter
-        pause: 1
-        action: press
-        value: Enter
-
-      - name: hover_to_the_first_item
-        locator: todo_label_1
-        action: hover
-
-      - name: delete_first_item
-        pause: 2
-        locator: todo_item_button_1
-        action: click
-
-      - name: hover_to_the_second_item
-        locator: todo_label_2
-        action: hover
-
-      - name: delete_second_item
-        pause: 2
-        locator: todo_item_button_2
-        action: click
-
-      - name: hover_to_the_third_item
-        locator: todo_label_3
-        action: hover
-
-      - name: delete_third_item
-        pause: 2
-        locator: todo_item_button_3
-        action: click        
-
-    assert:
-      - name: verify_selection
-        pause: 2
-        type: text
-        text: The first todo item
-        state: invisible
-
-      - name: verify_selection
-        pause: 2
-        type: text
-        text: The second todo item
-        state: invisible
-
-      - name: verify_selection
-        pause: 2
-        type: text
-        text: The third todo item
-        state: invisible
+      - name: Compare screenshot after all items deleted
+        type: snapshot
+        original: "src/example/resources/snapshots/original-screenshot-2.png"
+        reference: "src/example/resources/snapshots/reference-screenshot-2.png"
