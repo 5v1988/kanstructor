@@ -17,7 +17,7 @@ import Asserter from '../core/asserter';
 import { Suite, Test } from '../core/types/test.types';
 import chalk from 'chalk';
 import { Element, Report } from '../core/types/report.types';
-import { writeToJson } from './utils';
+import { generateJsonReport } from './utils';
 import generateReport from './report.generation';
 
 export default async function main() {
@@ -79,6 +79,6 @@ export default async function main() {
         if (report.elements.length > 0)
             reports.push(report);
     }
-    writeToJson(reports);
+    generateJsonReport(config.reportJson, reports);
     generateReport(config);
 }

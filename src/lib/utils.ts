@@ -1,5 +1,6 @@
 import fs from 'fs'
 import chalk from 'chalk';
+import { Report } from '../core/types/report.types';
 
 export async function delay(seconds: number) {
     const ms = seconds * 1000;
@@ -18,8 +19,8 @@ export const write = async (path: string, elements: string[]) => {
         chalk.white.bgBlue.bold('%s')), path);
 }
 
-export const writeToJson = async (jsonObject: any) => {
-    fs.writeFileSync('results.json', JSON.stringify(jsonObject));
+export const generateJsonReport = async (path: string, reportObj: Report[]) => {
+    fs.writeFileSync(path, JSON.stringify(reportObj));
 }
 
 export const readSnapshot = async (path: string) => {
