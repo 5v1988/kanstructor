@@ -17,25 +17,23 @@
 
 ## Installation
 
+**IMPORTANT:** Since this package is node based project, let's remember to install `node` and `npm` as pre-requisites before setting up the project. [Refer here for more info.](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+
 ```sh
-mkdir test-project && cd test-project #create and change to project dir
-npm init
-npm install dancing-yaml
+npx setup-dance-studio demo-project
 ```
 
-**IMPORTANT:** Remember to install `node` and `npm` as pre-requisites before setting up the project using this package [Refer here for more info.](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+Running the above command automatically sets up project structure, along with example files. [This section](#quick-start) provides the details on how the project resources are organised.
 
-
-Also, this package transtively depends on Playwright, it's required to install browsers needed for Playwright using this command below.
-
+In order to run the tests, the following command does the job:
 
 ```sh
-npx playwright install
+npm run test
 ```
 
 ## Quick Start
 
-- **Step 1** : Create `resources` folder which is going to be a root directory for all testing stuff
+- **Step 1** : The `src` folder under the project is going to be a root directory for all testing stuff, and the most of the project contents will be inside `resources` directory.
 
 - **Step 2** : Under `resources` folder, let's create `tests` folder which will contain test files in a plain YAML format. Note that, this package `dancing-yaml` identifies a file as a test file only if it ends in `*test.yaml`. [More on how to write tests?](#write-tests)
 
@@ -50,7 +48,7 @@ npx playwright install
 		home_logo: "a[href*='home']"
 	```
 
-- **Step 4** : The next step is, folders `extracted-contents` and `snapshots` need to be created to save all contents extracted during testing to external files and to keep golden copies of screenshots that will be verified against app under tests during testing respectively.
+- **Step 4** : The next step is, the folders `extracted-contents` and `snapshots` need to be created to save all contents extracted during testing to external files and to keep golden copies of screenshots that will be verified against app under tests during testing respectively.
 
 - **Step 5** : All common configurations such as browser, env etc will have to be in the file: `config.yaml` under `config` folder. The following snippet shows some examples.
 
@@ -73,19 +71,24 @@ Now execute tests using `node src/runMe.js` from command line. Note that, not ne
 
 ```sh
 .
+├── README.md
+├── node_modules
+├── package-lock.json
+├── package.json
 └── src
-    ├── node_modules
-    ├── package-lock.json
-    ├── package.json
     ├── resources
     │   ├── config
     │   │   └── config.yaml
     │   ├── elements
-    │   │   └── forgot-password-element.yaml
-    │   ├── extracted-contents
+    │   │   └── todo-element.yaml
+    │   ├── reports
+    │   │   ├── results.html
+    │   │   └── results.json
     │   ├── snapshots
+    │   │   ├── original-screenshot-1.png
+    │   │   └── reference-screenshot-1.png
     │   └── tests
-    │       └── forgot-password-test.yaml
+    │       └── todo-test.yaml
     └── runMe.js
 
 ```
