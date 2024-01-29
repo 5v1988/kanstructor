@@ -50,38 +50,49 @@ export default class Actor {
                     act.pause);
             }
             await this.driver.waitForLoadState('networkidle');
+
+            let element;
+            if (act.role) {
+                if (!act.text)
+                    throw new Error(`The key: text should be required when using role. Please check once.`);
+                element = this.driver.getByRole(act.role, { name: new RegExp(act.text.trim(), "i") });
+            } else if (act.text) {
+                element = this.driver.getByText(act.text);
+            } else {
+                element = this.driver.locator(act.locator);
+            }
+
             try {
                 switch (act.action) {
                     case 'type':
-                        await this.driver.locator(act.locator).fill(act.value);
+                        await element.fill(act.value);
                         break;
                     case 'check':
-                        await this.driver.locator(act.locator).check();
+                        await element.check();
                         break;
                     case 'uncheck':
-                        await this.driver.locator(act.locator).uncheck();
+                        await element.uncheck();
                         break;
                     case 'press':
                         await this.driver.keyboard.press(act.value);
                         break;
                     case 'click':
-                        await this.driver.locator(act.locator).click();
+                        await element.click();
                         break;
                     case 'doubleclick':
-                        await this.driver.locator(act.locator).dblclick();
+                        await element.dblclick();
                         break;
                     case 'clear':
-                        await this.driver.locator(act.locator).clear();
+                        await element.clear();
                         break;
                     case 'focus':
-                        await this.driver.locator(act.locator).focus();
+                        await element.focus();
                         break;
                     case 'select':
-                        await this.driver.locator(act.locator)
-                            .selectOption({ label: act.value });
+                        await element.selectOption({ label: act.value });
                         break;
                     case 'hover':
-                        await this.driver.locator(act.locator).hover();
+                        await element.hover();
                         break;
                     case 'snapshot':
                         await delay(1);
@@ -95,14 +106,11 @@ export default class Actor {
                     case 'extract':
                         let text = [];
                         if (act.locator && act.extractType === 'innerText')
-                            text = await this.driver.locator(act.locator)
-                                .allInnerTexts();
+                            text = await element.allInnerTexts();
                         else if (act.locator && act.extractType === 'textContents')
-                            text = await this.driver.locator(act.locator)
-                                .allTextContents();
+                            text = await element.allTextContents();
                         else if (act.locator && act.extractType === 'innerHTML')
-                            text = Array.of(await this.driver.locator(act.locator)
-                                .innerHTML());
+                            text = Array.of(await element.innerHTML());
                         else
                             text = Array.of(await this.driver.content());
                         write(act.path, text);
@@ -113,11 +121,11 @@ export default class Actor {
                         break;
                     case 'download':
                         const downloadEvent = await this.driver.waitForEvent('download');
-                        await this.driver.locator(act.locator).click();
+                        await element.click();
                         await downloadEvent.saveAs(act.dir + downloadEvent.suggestedFilename());
                         break;
                     case 'upload':
-                        await this.driver.locator(act.locator).setInputFiles(act.path);
+                        await element.setInputFiles(act.path);
                         break
                     default:
                         throw new Error(`No such action: '${act.action}'. Please check for typo.`);

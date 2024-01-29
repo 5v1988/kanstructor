@@ -10,6 +10,7 @@
 ## Highlights
 
 - No programming
+- Very simple installation steps
 - Automated tests in plain Yaml
 - Visual regression tests in minutes
 - Browser compatibility checks
@@ -28,6 +29,7 @@ Running the above command automatically sets up project structure, along with ex
 In order to run the tests, the following command does the job:
 
 ```sh
+cd demo-project
 npm run test
 ```
 
@@ -66,7 +68,7 @@ npm run test
     import runMe from 'dancing-yaml'
     runMe();
   ```
-Now execute tests using `node src/runMe.js` from command line. Note that, not necessarily that the runner method must always be named as `runMe`; The below is the sample structure once all setup is complete.
+Now execute tests using `node src/runMe.js` ( or `npm run test`) from command line. Note that, not necessarily that the runner method must always be named as `runMe`; Once all setup is complete, the below is the expected project structure
 
 
 ```sh

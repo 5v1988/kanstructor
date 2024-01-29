@@ -57,37 +57,42 @@ export default class Asserter {
                     assert.pause);
             }
             await this.driver.waitForLoadState('networkidle');
+
+            let element;
+            if (assert.role) {
+                if (!assert.text)
+                    throw new Error(`The key: text should be required when using role. Please check once.`);
+                element = this.driver.getByRole(assert.role, { name: new RegExp(assert.text.trim(), "i") });
+            } else if (assert.text) {
+                element = this.driver.getByText(assert.text);
+            } else {
+                element = this.driver.locator(assert.locator);
+            }
+
             try {
                 switch (assert.type) {
-                    case 'element':
+                    case 'standard':
                         switch (assert.state) {
                             case 'visible':
-                                await expect(this.driver.locator(assert.locator))
-                                    .toBeVisible({ timeout: 10000 });
+                                await expect(element).toBeVisible({ timeout: 10000 });
                                 break;
                             case 'invisible':
-                                await expect(this.driver.locator(assert.locator))
-                                    .toBeVisible({ visible: false });
+                                await expect(element).toBeVisible({ visible: false });
                                 break;
                             case 'enabled':
-                                await expect(this.driver.locator(assert.locator))
-                                    .toBeEnabled();
+                                await expect(element).toBeEnabled();
                                 break;
                             case 'disabled':
-                                await expect(this.driver.locator(assert.locator))
-                                    .toBeDisabled();
+                                await expect(element).toBeDisabled();
                                 break;
                             case 'checked':
-                                await expect(this.driver.locator(assert.locator))
-                                    .toBeChecked();
+                                await expect(element).toBeChecked();
                                 break;
                             case 'unchecked':
-                                await expect(this.driver.locator(assert.locator))
-                                    .toBeChecked({ checked: false });
+                                await expect(element).toBeChecked({ checked: false });
                                 break;
                             case 'containText':
-                                await expect(this.driver.locator(assert.locator))
-                                    .toContainText(assert.text);
+                                await expect(element).toContainText(assert.text);
                                 break;
                         }
                         break;
@@ -102,18 +107,18 @@ export default class Asserter {
                         expect(equal).toBeTruthy();
                         break;
 
-                    case 'text':
-                        switch (assert.state) {
-                            case 'visible':
-                                await expect(this.driver.getByText(assert.text, { exact: false }))
-                                    .toBeVisible({ timeout: 10000 });
-                                break;
-                            case 'invisible':
-                                await expect(this.driver.getByText(assert.text, { exact: false }))
-                                    .toBeVisible({ visible: false, timeout: 10000 });
-                                break;
-                        }
-                        break;
+                    // case 'text':
+                    //     switch (assert.state) {
+                    //         case 'visible':
+                    //             await expect(this.driver.getByText(assert.text, { exact: false }))
+                    //                 .toBeVisible({ timeout: 10000 });
+                    //             break;
+                    //         case 'invisible':
+                    //             await expect(this.driver.getByText(assert.text, { exact: false }))
+                    //                 .toBeVisible({ visible: false, timeout: 10000 });
+                    //             break;
+                    //     }
+                    //     break;
                     default:
                         throw new Error(`No such assertion: '${assert.type}'. Please check for typo.`);
                 }

@@ -91,6 +91,16 @@
                 "locator": {
                   "type": "string"
                 },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "textbox",
+                    "checkbox",
+                    "radio",
+                    "link",
+                    "option"
+                  ]
+                },
                 "value": {
                   "type": "string"
                 },
@@ -121,6 +131,13 @@
                     "name",
                     "refId"
                   ]
+                },
+                {
+                  "required": [
+                    "name",
+                    "role",
+                    "text"
+                  ]
                 }
               ]
             }
@@ -143,9 +160,8 @@
                 "type": {
                   "type": "string",
                   "enum": [
-                    "element",
-                    "snapshot",
-                    "text"
+                    "standard",
+                    "snapshot"
                   ]
                 },
                 "locator": {

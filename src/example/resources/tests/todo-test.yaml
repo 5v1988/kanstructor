@@ -9,7 +9,8 @@ tests:
 
     act:
       - name: Add the first item
-        locator: .new-todo
+        role: textbox
+        text: What needs to be done?
         action: type
         value: Schedule doctor appointment
 
@@ -44,16 +45,18 @@ tests:
         path: "src/example/resources/snapshots/original-screenshot-1.png"    
 
       - name: Hover to the first item
-        locator: "//div[normalize-space()='Schedule doctor appointment']"
+        text: Schedule doctor appointment
         action: hover
 
       - name: Delete the first item
         pause: 2
         locator: "//div[normalize-space()='Schedule doctor appointment']//button"
+        #role: button
+        #text: Schedule doctor appointment
         action: click
 
       - name: Hover to the second item
-        locator: "//div[normalize-space()='Prepare a blog content']"
+        text: Prepare a blog content
         action: hover
 
       - name: Delete the second item
@@ -62,12 +65,14 @@ tests:
         action: click
 
       - name: Hover to the third item
-        locator: "//div[normalize-space()='Fix the air conditioner']"
+        text: Fix the air conditioner
         action: hover
 
       - name: Delete the third item
         pause: 2
-        locator: "//div[normalize-space()='Fix the air conditioner']//button"
+        #role: button
+        text: Fix the air conditioner
+        #locator: "//div[normalize-space()='Fix the air conditioner']//button"
         action: click
 
       - name: Screenshot after deleting all items
@@ -78,19 +83,19 @@ tests:
     assert:
       - name: Verify if the first item deleted
         pause: 2
-        type: text
+        type: standard
         text: Schedule doctor appointment
         state: invisible
 
       - name: Verify if the second item deleted
         pause: 2
-        type: text
+        type: standard
         text: Prepare a blog content
         state: invisible
 
       - name: Verify if the third item deleted
         pause: 2
-        type: text
+        type: standard
         text: Fix the air conditioner
         state: invisible
 
