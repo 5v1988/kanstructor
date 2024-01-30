@@ -520,13 +520,31 @@ tests:
 ## Roadmap
 
 — [X] Browser <br>
-— [O] Summary report <br>
+— [X] Summary report <br>
 — [O] Parameterized tests <br>
 — [O] API <br>
 — [O] Mobile <br>
 
-## Contribute
+## Contributing
+
+We really appreciate and value the work that you do for this project. Needless to say, contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make will benefit everybody else and are greatly appreciated.
+
+
+Please read [our contribution guidelines](CONTRIBUTING.md), and thank you for being involved!
+
+### Code of Conduct
+
+See the [Code of Conduct](CODE-OF-CONDUCT.md) for details. Basically it comes down to:
+> In the interest of fostering an open and welcoming environment, we as
+contributors and maintainers pledge to making participation in our project and
+our community a harassment-free experience for everyone, regardless of age, body
+size, disability, ethnicity, gender identity and expression, level of experience,
+nationality, personal appearance, race, religion, or sexual identity and orientation.
 
 ## Support
 
 ## License
+
+This project is licensed under the **GPLv3 license**.
+
+See [LICENSE](LICENSE) for more information.
