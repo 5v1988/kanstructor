@@ -59,15 +59,19 @@ export default async function main() {
             const arranger = new Arranger(pwPage, test.arrange);
             const actor = new Actor(pwPage, test.act);
             const asserter = new Asserter(pwPage, test.assert);
+            let hasError: number = 0;
             try {
                 const arrangeStepResults = await arranger.arrange(config);
                 testResult.steps.push(...arrangeStepResults);
                 await actor.transformLocators(locators);
                 const actStepResults = await actor.act();
                 testResult.steps.push(...actStepResults);
-                await asserter.transformLocators(locators);
-                const assertStepResults = await asserter.assert();
-                testResult.steps.push(...assertStepResults);
+                hasError = testResult.steps.findIndex(step => step.result.status === 'failed');
+                if (hasError < 0) {
+                    await asserter.transformLocators(locators);
+                    const assertStepResults = await asserter.assert();
+                    testResult.steps.push(...assertStepResults);
+                }
                 log(chalk.green('Finishing the test: ', chalk.bold('%s')), test.name);
             } catch (error) {
                 log(chalk.red('Finishing the test: ', chalk.bold(' %s'), ' with failure due to %s'),

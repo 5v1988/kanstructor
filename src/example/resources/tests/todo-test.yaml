@@ -9,6 +9,7 @@ tests:
 
     act:
       - name: Add the first item
+        id: 10001
         role: textbox
         text: What needs to be done?
         action: type
@@ -30,8 +31,7 @@ tests:
         value: Enter
 
       - name: Add the third item
-        locator: .new-todo
-        action: type
+        refId: 10001
         value: Fix the air conditioner
 
       - name: Press Enter
@@ -51,8 +51,6 @@ tests:
       - name: Delete the first item
         pause: 2
         locator: "//div[normalize-space()='Schedule doctor appointment']//button"
-        #role: button
-        #text: Schedule doctor appointment
         action: click
 
       - name: Hover to the second item
@@ -70,9 +68,7 @@ tests:
 
       - name: Delete the third item
         pause: 2
-        #role: button
-        text: Fix the air conditioner
-        #locator: "//div[normalize-space()='Fix the air conditioner']//button"
+        locator: "//div[normalize-space()='Fix the air conditioner']//button"
         action: click
 
       - name: Screenshot after deleting all items
@@ -91,7 +87,7 @@ tests:
         pause: 2
         type: standard
         text: Prepare a blog content
-        state: invisible
+        state: visible
 
       - name: Verify if the third item deleted
         pause: 2

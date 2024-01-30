@@ -28,6 +28,7 @@ export default class Actor {
         const startTime = new Date().getTime();
         const results: Step[] = [];
         for (const act of this.acts) {
+            let hasError: boolean = false;
             const stepResult: Step = {
                 name: `— ${act.name}  `,
                 keyword: 'Act ',
@@ -40,29 +41,28 @@ export default class Actor {
                     mime_type: 'text/plain'
                 })
             };
-            console.log(chalk.green(' Performing the act : ', chalk.bold.bgYellow.white('%s')),
-                act.name);
-            if (act.pause) {
-                console.log(chalk.yellow('Pausing for ', chalk.bold('%s'), ' seconds'),
-                    act.pause);
-                await delay(act.pause);
-                console.log(chalk.green(' Resuming after pausing ', chalk.bold('%s'), ' seconds'),
-                    act.pause);
-            }
-            await this.driver.waitForLoadState('networkidle');
-
-            let element;
-            if (act.role) {
-                if (!act.text)
-                    throw new Error(`The key: text should be required when using role. Please check once.`);
-                element = this.driver.getByRole(act.role, { name: new RegExp(act.text.trim(), "i") });
-            } else if (act.text) {
-                element = this.driver.getByText(act.text);
-            } else {
-                element = this.driver.locator(act.locator);
-            }
-
             try {
+                console.log(chalk.green(' Performing the act : ', chalk.bold.bgYellow.white('%s')),
+                    act.name);
+                let element;
+                if (act.pause) {
+                    console.log(chalk.yellow('Pausing for ', chalk.bold('%s'), ' seconds'),
+                        act.pause);
+                    await delay(act.pause);
+                    console.log(chalk.green(' Resuming after pausing ', chalk.bold('%s'), ' seconds'),
+                        act.pause);
+                }
+                await this.driver.waitForLoadState('networkidle');
+
+                if (act.role) {
+                    if (!act.text)
+                        throw new Error(`The key: text should be required when using role. Please check once.`);
+                    element = this.driver.getByRole(act.role, { name: new RegExp(act.text.trim(), "i") });
+                } else if (act.text) {
+                    element = this.driver.getByText(act.text);
+                } else {
+                    element = this.driver.locator(act.locator);
+                }
                 switch (act.action) {
                     case 'type':
                         await element.fill(act.value);
@@ -132,11 +132,16 @@ export default class Actor {
                 }
                 stepResult.result.status = 'passed';
             } catch (error) {
+                hasError = true;
                 stepResult.result.status = 'failed';
+                console.log(chalk.red('Unexpected failure@step:', chalk.bold.bgYellow.white('%s'),
+                    ' Time to take a closer look!'), act.name);
             }
             const elaspedTime = new Date().getTime() - startTime;
             stepResult.result.duration = elaspedTime;
             results.push(stepResult);
+            if(hasError)
+                break;
         }
         return results;
     }

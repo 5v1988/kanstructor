@@ -42,14 +42,25 @@ export const getTransformedTests = async (tests: Test[]): Promise<Test[]> => {
         const extracts = test.assert.filter(it => it.id);
         assertsToUse.push(...extracts);
     });
+
     tests.forEach(test => {
-        const replacedOnes = test.act.map(act => act.refId ?
-            actsToUse.find(origAct => origAct.id === act.refId)! : act)
+        const replacedOnes = test.act.map(act => {
+            let actToUse: Act;
+            if (act.refId) {
+                actToUse = { ...actsToUse.find(origAct => origAct.id === act.refId)! };
+                actToUse.name = act.name;
+                if (act.value)
+                    actToUse.value = act.value;
+            } else {
+                actToUse = act;
+            }
+            return actToUse;
+        });
         test.act = replacedOnes;
     });
     tests.forEach(test => {
         const replacedOnes = test.assert.map(assert => assert.refId ?
-            assertsToUse.find(origAssert => origAssert.id === assert.refId)! : assert)
+            assertsToUse.find(origAssert => origAssert.id === assert.refId)! : assert);
         test.assert = replacedOnes;
     });
     return tests;
