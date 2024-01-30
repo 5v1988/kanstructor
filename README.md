@@ -10,6 +10,7 @@
 ## Highlights
 
 - No programming
+- Very simple installation steps
 - Automated tests in plain Yaml
 - Visual regression tests in minutes
 - Browser compatibility checks
@@ -28,6 +29,7 @@ Running the above command automatically sets up project structure, along with ex
 In order to run the tests, the following command does the job:
 
 ```sh
+cd demo-project
 npm run test
 ```
 
@@ -66,7 +68,7 @@ npm run test
     import runMe from 'dancing-yaml'
     runMe();
   ```
-Now execute tests using `node src/runMe.js` from command line. Note that, not necessarily that the runner method must always be named as `runMe`; The below is the sample structure once all setup is complete.
+Now execute tests using `node src/runMe.js` ( or `npm run test`) from command line. Note that, not necessarily that the runner method must always be named as `runMe`; Once all setup is complete, the below is the expected project structure
 
 
 ```sh
@@ -110,7 +112,9 @@ tests:
 
     act:
       - name: Add the first item
-        locator: .new-todo
+        id: 10001
+        role: textbox
+        text: What needs to be done?
         action: type
         value: Schedule doctor appointment
 
@@ -130,8 +134,7 @@ tests:
         value: Enter
 
       - name: Add the third item
-        locator: .new-todo
-        action: type
+        refId: 10001
         value: Fix the air conditioner
 
       - name: Press Enter
@@ -145,7 +148,7 @@ tests:
         path: "src/example/resources/snapshots/original-screenshot-1.png"    
 
       - name: Hover to the first item
-        locator: "//div[normalize-space()='Schedule doctor appointment']"
+        text: Schedule doctor appointment
         action: hover
 
       - name: Delete the first item
@@ -154,7 +157,7 @@ tests:
         action: click
 
       - name: Hover to the second item
-        locator: "//div[normalize-space()='Prepare a blog content']"
+        text: Prepare a blog content
         action: hover
 
       - name: Delete the second item
@@ -163,7 +166,7 @@ tests:
         action: click
 
       - name: Hover to the third item
-        locator: "//div[normalize-space()='Fix the air conditioner']"
+        text: Fix the air conditioner
         action: hover
 
       - name: Delete the third item
@@ -179,19 +182,19 @@ tests:
     assert:
       - name: Verify if the first item deleted
         pause: 2
-        type: text
+        type: standard
         text: Schedule doctor appointment
         state: invisible
 
       - name: Verify if the second item deleted
         pause: 2
-        type: text
+        type: standard
         text: Prepare a blog content
-        state: invisible
+        state: visible
 
       - name: Verify if the third item deleted
         pause: 2
-        type: text
+        type: standard
         text: Fix the air conditioner
         state: invisible
 

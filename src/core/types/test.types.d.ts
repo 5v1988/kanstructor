@@ -25,6 +25,8 @@ export interface Act {
   action: 'type' | 'check' | 'uncheck' | 'click' | 'doubleclick' | 'press' |'clear' | 'select' | 'snapshot' | 'extract' | 'hover' | 'focus' | 'upload' | 'download'
   pause?: number
   locator: string
+  role: 'textbox' | 'checkbox' | 'radio' | 'link' | 'option'
+  text: string
   value: string
   extractType?: 'textContents' | 'innerText' | 'innerHTML'
   dir: string
@@ -35,9 +37,11 @@ export interface Assert {
   name: string
   id: number
   refId: number
-  type: 'element' | 'snapshot' | 'text'
+  type: 'standard' | 'snapshot'
   pause?: number
   locator: string
+  role: 'textbox' | 'checkbox' | 'radio' | 'link' | 'option'
+  text: string
   state: 'visible' | 'invisible' | 'enabled' | 'disabled' | 'checked' | 'unchecked' | 'containText'
   text: string
   original: string
