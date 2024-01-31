@@ -543,6 +543,8 @@ nationality, personal appearance, race, religion, or sexual identity and orienta
 
 ## Support
 
+https://discord.gg/GWfMu5Cwq6
+
 ## License
 
 This project is licensed under the **GPLv3 license**.

@@ -87,7 +87,7 @@ tests:
         pause: 2
         type: standard
         text: Prepare a blog content
-        state: visible
+        state: invisible
 
       - name: Verify if the third item deleted
         pause: 2
