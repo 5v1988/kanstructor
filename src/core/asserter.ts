@@ -1,10 +1,11 @@
 import { Page, expect } from "@playwright/test";
 import { Assert } from "./types/test.types";
-import compareImage from 'looks-same';
+import compareImages from 'resemblejs/compareImages';
 import chalk from 'chalk';
 import { delay, readSnapshot } from "../lib/utils";
 import { Step } from "./types/report.types";
 import YAML from 'json-to-pretty-yaml';
+import { snapshotOptions } from "../lib/snapshot.config";
 
 export default class Asserter {
 
@@ -102,8 +103,8 @@ export default class Asserter {
                             data: original,
                             mime_type: 'image/png'
                         });
-                        const { equal } = await compareImage(assert.original, assert.reference);
-                        expect(equal).toBeTruthy();
+                        const diff = await compareImages(assert.original, assert.reference, snapshotOptions);
+                        expect(diff.rawMisMatchPercentage).toBeFalsy();
                         break;
                     // case 'text':
                     //     switch (assert.state) {

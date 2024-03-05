@@ -7,3 +7,4 @@ src/example/resources/.DS_Store
 .DS_Store
 src/example/resources/extracted-contents
 dist
+src/example/resources/reports
