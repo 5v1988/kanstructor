@@ -1,6 +1,6 @@
 import { Page, expect } from "@playwright/test";
 import { Assert } from "./types/test.types";
-import compareImages from 'resemblejs/compareImages';
+import compareImages from 'resemblejs/compareImages.js';
 import chalk from 'chalk';
 import { delay, readSnapshot } from "../lib/utils";
 import { Step } from "./types/report.types";
