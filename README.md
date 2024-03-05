@@ -18,7 +18,7 @@
 
 ## Installation
 
-**IMPORTANT:** Since this package is node based project, let's remember to install `node` and `npm` as pre-requisites before setting up the project. [Refer here for more info.](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+**IMPORTANT:** Given this package is a node project, let's ensure to install `node` and `npm` as pre-requisites before setting up the project. [For further info.](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 ```sh
 npx setup-dance-studio demo-project
