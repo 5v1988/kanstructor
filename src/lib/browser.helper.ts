@@ -22,7 +22,10 @@ export const getBrowserContext = async (config: TestConfig) => {
             browser = await webkit.launch({ headless: config.headless });
             break;
     }
-    context = await browser!.newContext(devices[config.device]);
+    context = await browser!.newContext({
+        ...devices[config.device],
+        viewport: config.viewport
+    });
     console.log(chalk.green('Testing browser : ', chalk.bold('%s'), 'with emulation : ',
         chalk.bold('%s')), config.browser, config.device);
     return { browser, context };

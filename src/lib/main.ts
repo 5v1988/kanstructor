@@ -83,6 +83,6 @@ export default async function main() {
         if (report.elements.length > 0)
             reports.push(report);
     }
-    generateJsonReport(config.reportJson, reports);
+    generateJsonReport(config.report.json, reports);
     generateReport(config);
 }

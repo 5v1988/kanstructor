@@ -5,12 +5,12 @@ import os from 'os';
 
 export default function generateReport(config: TestConfig) {
     const options: reporter.Options = {
-        theme: config.reportTheme,
-        jsonFile: config.reportJson,
-        output: config.reportPath,
-        brandTitle: config.reportTitle,
-        launchReport: config.reportLaunch,
-        reportSuiteAsScenarios: false,
+        theme: config.report.theme,
+        jsonFile: config.report.json,
+        output: config.report.html,
+        brandTitle: config.report.title,
+        launchReport: config.report.launch,
+        reportSuiteAsScenarios: true,
         scenarioTimestamp: true,
         metadata: {
             'Version': '1.0.0',

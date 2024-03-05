@@ -1,14 +1,23 @@
 export interface TestConfig {
-    browser: 'chrome' | 'firefox' | 'webkit'
-    headless: boolean
-    environment: qa | staging | production
-    device: string
-    url: string
-    defaultWaitSeconds: number
-    reportTheme: 'bootstrap' | 'simple' | 'foundation' | 'hierarchy'
-    reportJson: string
-    reportPath: string
-    reportTitle: string
-    reportLaunch: boolean
-  }
-  
+  browser: string
+  headless: boolean
+  viewport: Viewport
+  environment: string
+  device: string
+  url: string
+  defaultWaitSeconds: number
+  report: Report
+}
+
+export interface Viewport {
+  width: number
+  height: number
+}
+
+export interface Report {
+  theme: "bootstrap" | "hierarchy" | "foundation" | "simple"
+  json: string
+  html: string
+  title: string
+  launch: boolean
+}

@@ -1,12 +1,15 @@
 browser: chrome
 headless: false
+viewport:
+  width: 1280
+  height: 720
 environment: qa
 device: Desktop Chrome
 url: https://example.cypress.io/todo#/
 defaultWaitSeconds: 5
-#Report related configurations
-reportTheme: 'bootstrap'  # 'bootstrap' or 'simple' or 'foundation' or 'hierarchy'
-reportJson: 'src/example/resources/reports/results.json'
-reportPath: 'src/example/resources/reports/results.html'
-reportTitle: 'Test Summary Report'
-reportLaunch: true
+report:
+  theme: bootstrap # 'bootstrap' or 'simple' or 'foundation' or 'hierarchy'
+  json: src/example/resources/reports/results.json
+  html: src/example/resources/reports/results.html
+  title: Test Summary Report
+  launch: true
