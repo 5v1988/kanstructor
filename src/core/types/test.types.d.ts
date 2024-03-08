@@ -46,4 +46,5 @@ export interface Assert {
   text: string
   original: string
   reference: string
+  tolerance: number
 }

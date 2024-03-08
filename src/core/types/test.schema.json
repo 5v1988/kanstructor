@@ -181,6 +181,15 @@
                 },
                 "text": {
                   "type": "string"
+                },
+                "original": {
+                  "type": "string"
+                },
+                "reference": {
+                  "type": "string"
+                },
+                "tolerance": {
+                  "type": "number"
                 }
               },
               "oneOf": [

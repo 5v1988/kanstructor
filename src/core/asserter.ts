@@ -98,15 +98,15 @@ export default class Asserter {
                         break;
 
                     case 'snapshot':
-                        const original = await readSnapshot(assert.original);
                         const vcOptions = await getVisualComparisonConfigurations(Asserter.VISUAL_CONFIG_PATH);
-                        stepResult.embeddings!.push({
-                            data: original,
-                            mime_type: 'image/png'
-                        });
                         const diff = await compareImages(assert.original, assert.reference,
                             vcOptions);
-                        expect(diff.rawMisMatchPercentage).toBeFalsy();
+                        const diffSnapshot = diff.getBuffer!(false).toString('base64');
+                        stepResult.embeddings!.push({
+                            data: diffSnapshot,
+                            mime_type: 'image/png'
+                        });
+                        expect(diff.rawMisMatchPercentage <= assert.tolerance).toBeTruthy();
                         break;
                     // case 'text':
                     //     switch (assert.state) {

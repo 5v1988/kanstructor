@@ -3,14 +3,32 @@ output:
     red: 255
     green: 0
     blue: 0
-  errorType: flat
+  errorType: flat #"flat" or "movement" or "flatDifferenceIntensity" or "movementDifferenceIntensity" or "diffOnly"
   transparency: 0.3
   largeImageThreshold: 1200
   useCrossOrigin: false
-  boundingBox:
-    left: 100
-    top: 100
-    right: 400
-    bottom: 300
-scaleToSameSize: true
-ignore: antialiasing
+# ignoreAreasColoredWith:
+#   r: 255
+#   g: 0
+#   b: 0
+#   a: 0
+  boundingBoxes:
+    - left: 0
+      top: 0
+      right: 1300
+      bottom: 800
+#   ignoredBoxes:
+#   - left: 100
+#     top: 100
+#     right: 400
+#     bottom: 300
+returnEarlyThreshold: 0
+scaleToSameSize: false
+ignore: antialiasing # "nothing" or "less" or "antialiasing" or "colors" or "alpha";
+# tolerance:
+#   red: 255
+#   green: 255
+#   blue: 255
+#   alpha: 255
+#   minBrightness: 255
+#   maxBrightness: 255
