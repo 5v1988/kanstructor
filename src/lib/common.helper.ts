@@ -3,6 +3,7 @@ import yaml from 'yaml'
 import { glob } from 'glob';
 import { Act, Assert, Suite, Test } from '../core/types/test.types';
 import { TestConfig } from '../core/types/config.types';
+import { ComparisonOptions } from 'resemblejs';
 
 export const getSuites = async (pattern: string): Promise<Suite[]> => {
     const paths = await glob(pattern);
@@ -82,4 +83,11 @@ export const getConfigurations = async (pattern: string) => {
     const file = fs.readFileSync(path[0], 'utf8');
     const config: TestConfig = await yaml.parse(file);
     return config;
+};
+
+export const getVisualComparisonConfigurations = async (pattern: string) => {
+    const path = await glob(pattern);
+    const file = fs.readFileSync(path[0], 'utf8');
+    const vcConfig: ComparisonOptions = await yaml.parse(file);
+    return vcConfig;
 };

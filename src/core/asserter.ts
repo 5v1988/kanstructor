@@ -5,10 +5,10 @@ import chalk from 'chalk';
 import { delay, readSnapshot } from "../lib/utils";
 import { Step } from "./types/report.types";
 import YAML from 'json-to-pretty-yaml';
-import { snapshotOptions } from "../lib/snapshot.config";
+import { getVisualComparisonConfigurations } from "../lib/common.helper";
 
 export default class Asserter {
-
+    private static readonly VISUAL_CONFIG_PATH = '**/resources/**/visual.tests.config.{yaml,yml}';
     private asserts: Assert[]
     private driver: Page;
 
@@ -99,11 +99,13 @@ export default class Asserter {
 
                     case 'snapshot':
                         const original = await readSnapshot(assert.original);
+                        const vcOptions = await getVisualComparisonConfigurations(Asserter.VISUAL_CONFIG_PATH);
                         stepResult.embeddings!.push({
                             data: original,
                             mime_type: 'image/png'
                         });
-                        const diff = await compareImages(assert.original, assert.reference, snapshotOptions);
+                        const diff = await compareImages(assert.original, assert.reference,
+                            vcOptions);
                         expect(diff.rawMisMatchPercentage).toBeFalsy();
                         break;
                     // case 'text':
