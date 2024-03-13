@@ -6,6 +6,7 @@ import { delay, readSnapshot } from "../lib/utils";
 import { Step } from "./types/report.types";
 import YAML from 'json-to-pretty-yaml';
 import { getVisualComparisonConfigurations } from "../lib/common.helper";
+import storage from '../lib/storage.helper';
 
 export default class Asserter {
     private static readonly VISUAL_CONFIG_PATH = '**/resources/**/visual.tests.config.{yaml,yml}';
@@ -108,6 +109,14 @@ export default class Asserter {
                         });
                         expect(diff.rawMisMatchPercentage <= assert.tolerance).toBeTruthy();
                         break;
+                    case 'compareValue':
+                        let expectedValue = await storage.getValue(assert.key);
+                        let actualValue = assert.value;
+                        if (assert.locator) {
+                            actualValue = await element.innerText();
+                        }
+                        expect(actualValue).toEqual(expectedValue);
+                        break;
                     // case 'text':
                     //     switch (assert.state) {
                     //         case 'visible':
@@ -125,7 +134,7 @@ export default class Asserter {
                 }
                 stepResult.result.status = 'passed';
             } catch (error) {
-                hasError = true;
+                // hasError = true;
                 stepResult.result.status = 'failed';
                 console.log(chalk.red('Unexpected failure@step:', chalk.bold.bgYellow.white('%s'),
                     ' Time to take a closer look!'), assert.name);
@@ -133,8 +142,8 @@ export default class Asserter {
             const elaspedTime = new Date().getTime() - startTime;
             stepResult.result.duration = elaspedTime;
             results.push(stepResult);
-            if (hasError)
-                break;
+            // if (hasError)
+            //     break;
         }
         return results;
     }

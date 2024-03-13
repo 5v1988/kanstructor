@@ -4,11 +4,11 @@ import { delay, write } from "../lib/utils";
 import chalk from 'chalk';
 import { Step } from "./types/report.types";
 import YAML from 'json-to-pretty-yaml';
+import storage from '../lib/storage.helper';
 
 export default class Actor {
     private acts: Act[]
     private driver: Page;
-
     constructor(page: Page, acts: Act[]) {
         this.acts = acts;
         this.driver = page;
@@ -127,6 +127,13 @@ export default class Actor {
                     case 'upload':
                         await element.setInputFiles(act.path);
                         break
+                    case 'setValue':
+                        let value = act.value;
+                        if (act.locator){
+                            value = await element.innerText();
+                        }
+                        await storage.setValue(act.key, value);
+                        break; 
                     default:
                         throw new Error(`No such action: '${act.action}'. Please check for typo.`);
                 }
@@ -140,7 +147,7 @@ export default class Actor {
             const elaspedTime = new Date().getTime() - startTime;
             stepResult.result.duration = elaspedTime;
             results.push(stepResult);
-            if(hasError)
+            if (hasError)
                 break;
         }
         return results;

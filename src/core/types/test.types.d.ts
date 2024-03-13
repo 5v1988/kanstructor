@@ -22,11 +22,12 @@ export interface Act {
   name: string
   id: number
   refId: number
-  action: 'type' | 'check' | 'uncheck' | 'click' | 'doubleclick' | 'press' |'clear' | 'select' | 'snapshot' | 'extract' | 'hover' | 'focus' | 'upload' | 'download'
+  action: 'type' | 'check' | 'uncheck' | 'click' | 'doubleclick' | 'press' |'clear' | 'select' | 'snapshot' | 'extract' | 'hover' | 'focus' | 'upload' | 'download' | 'setValue'
   pause?: number
   locator: string
   role: 'textbox' | 'checkbox' | 'radio' | 'link' | 'option'
   text: string
+  key: string
   value: string
   extractType?: 'textContents' | 'innerText' | 'innerHTML'
   dir: string
@@ -37,13 +38,14 @@ export interface Assert {
   name: string
   id: number
   refId: number
-  type: 'standard' | 'snapshot'
+  type: 'standard' | 'snapshot' | 'compareValue'
   pause?: number
   locator: string
   role: 'textbox' | 'checkbox' | 'radio' | 'link' | 'option'
   text: string
+  key: string
+  value: string
   state: 'visible' | 'invisible' | 'enabled' | 'disabled' | 'checked' | 'unchecked' | 'containText'
-  text: string
   original: string
   reference: string
   tolerance: number
