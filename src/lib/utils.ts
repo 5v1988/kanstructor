@@ -26,3 +26,13 @@ export const generateJsonReport = async (path: string, reportObj: Report[]) => {
 export const readSnapshot = async (path: string) => {
     return fs.readFileSync(path, { encoding: 'base64' })
 }
+
+export const resolveValue = async (value: string) => {
+    const pattern: RegExp = /\${([^}]+)}|\$([^$\s]+)/g;
+    const matches: string[] = [];
+    let match;
+    while ((match = pattern.exec(value)) !== null) {
+        matches.push(match[1] || match[2]);
+    }
+    return matches[0];
+}

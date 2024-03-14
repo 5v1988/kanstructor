@@ -38,13 +38,13 @@ export interface Assert {
   name: string
   id: number
   refId: number
-  type: 'standard' | 'snapshot' | 'compareValue'
+  type: 'standard' | 'snapshot' | 'compare'
   pause?: number
   locator: string
   role: 'textbox' | 'checkbox' | 'radio' | 'link' | 'option'
   text: string
-  key: string
   value: string
+  expectedValue: string
   state: 'visible' | 'invisible' | 'enabled' | 'disabled' | 'checked' | 'unchecked' | 'containText'
   original: string
   reference: string

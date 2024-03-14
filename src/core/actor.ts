@@ -1,6 +1,6 @@
 import { Page } from "@playwright/test";
 import { Act } from "./types/test.types";
-import { delay, write } from "../lib/utils";
+import { delay, resolveValue, write } from "../lib/utils";
 import chalk from 'chalk';
 import { Step } from "./types/report.types";
 import YAML from 'json-to-pretty-yaml';
@@ -44,9 +44,16 @@ export default class Actor {
             try {
                 console.log(chalk.green(' Performing the act : ', chalk.bold.bgYellow.white('%s')),
                     act.name);
+                if (act.value) {
+                    console.log(chalk.yellow(' Resolving value: ', chalk.bold('%s')), act.value);
+                    let key = await resolveValue(act.value);
+                    if(key){
+                        act.value = await storage.getValue(key);
+                    }
+                }
                 let element;
                 if (act.pause) {
-                    console.log(chalk.yellow('Pausing for ', chalk.bold('%s'), ' seconds'),
+                    console.log(chalk.yellow(' Pausing for ', chalk.bold('%s'), ' seconds'),
                         act.pause);
                     await delay(act.pause);
                     console.log(chalk.green(' Resuming after pausing ', chalk.bold('%s'), ' seconds'),
@@ -129,11 +136,11 @@ export default class Actor {
                         break
                     case 'setValue':
                         let value = act.value;
-                        if (act.locator){
+                        if (act.locator) {
                             value = await element.innerText();
                         }
                         await storage.setValue(act.key, value);
-                        break; 
+                        break;
                     default:
                         throw new Error(`No such action: '${act.action}'. Please check for typo.`);
                 }

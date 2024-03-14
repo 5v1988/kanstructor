@@ -2,7 +2,7 @@ import { Page, expect } from "@playwright/test";
 import { Assert } from "./types/test.types";
 import compareImages from 'resemblejs/compareImages.js';
 import chalk from 'chalk';
-import { delay, readSnapshot } from "../lib/utils";
+import { delay, resolveValue } from "../lib/utils";
 import { Step } from "./types/report.types";
 import YAML from 'json-to-pretty-yaml';
 import { getVisualComparisonConfigurations } from "../lib/common.helper";
@@ -53,6 +53,13 @@ export default class Asserter {
             try {
                 console.log(chalk.green(' Performing the assert : ', chalk.bold.bgYellow.white('%s')),
                     assert.name);
+                if (assert.value) {
+                    console.log(chalk.yellow(' Resolving value: ', chalk.bold('%s')), assert.value);
+                    let key = await resolveValue(assert.value);
+                    if(key){
+                        assert.value = await storage.getValue(key);
+                    }
+                }
                 let element;
                 if (assert.pause) {
                     console.log(chalk.yellow('Pausing for ', chalk.bold('%s'), ' seconds'),
@@ -109,13 +116,9 @@ export default class Asserter {
                         });
                         expect(diff.rawMisMatchPercentage <= assert.tolerance).toBeTruthy();
                         break;
-                    case 'compareValue':
-                        let expectedValue = await storage.getValue(assert.key);
+                    case 'compare':
                         let actualValue = assert.value;
-                        if (assert.locator) {
-                            actualValue = await element.innerText();
-                        }
-                        expect(actualValue).toEqual(expectedValue);
+                        expect(actualValue).toEqual(assert.expectedValue);
                         break;
                     // case 'text':
                     //     switch (assert.state) {
