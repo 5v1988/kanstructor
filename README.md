@@ -1,6 +1,6 @@
 <h1 align="center">
 	<br>
-	<img width="480" src="src/media/dy-logo.svg" alt="Dancing-Yaml">
+	<img width="480" src="src/media/dy-logo.svg" alt="Kanstructor">
 	<br>
 	<br>
 </h1>
@@ -21,7 +21,7 @@
 **IMPORTANT:** Given this package is a node project, let's ensure to install `node` and `npm` as pre-requisites before setting up the project. [For further info.](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 ```sh
-npx setup-dance-studio demo-project
+npx setup-kanstructor demo-project
 ```
 
 Running the above command automatically sets up project structure, along with example files. [This section](#quick-start) provides the details on how the project resources are organised.
@@ -37,7 +37,7 @@ npm run test
 
 - **Step 1** : The `src` folder under the project is going to be a root directory for all testing stuff, and the most of the project contents will be inside `resources` directory.
 
-- **Step 2** : Under `resources` folder, let's create `tests` folder which will contain test files in a plain YAML format. Note that, this package `dancing-yaml` identifies a file as a test file only if it ends in `*test.yaml`. [More on how to write tests?](#write-tests)
+- **Step 2** : Under `resources` folder, let's create `tests` folder which will contain test files in a plain YAML format. Note that, this package `kanstructor` identifies a file as a test file only if it ends in `*test.yaml`. [More on how to write tests?](#write-tests)
 
 - **Step 3** : Many a times, `CSS` and `XPath` values used to identify html elements will be used in several places across test files. To keep all such values in centralized place, the folder `elements` needs to be created within `resources`. Just like test files, the element files need to be ending in `*element.yaml` The following snippet shows some example element yaml.
 
@@ -59,13 +59,13 @@ npm run test
 		browser: chrome
 		headless: false
 		device: Desktop Chrome
-		url: https://github.com/5v1988/dancing-yaml
+		url: https://github.com/5v1988/kanstructor
 	```
 
 — **Step 6** : Lastly, to run all tests, the test runner `runMe.js` needs to be created in the project as follows:
 
   ```js
-    import runMe from 'dancing-yaml'
+    import runMe from 'kanstructor'
     runMe();
   ```
 Now execute tests using `node src/runMe.js` ( or `npm run test`) from command line. Note that, not necessarily that the runner method must always be named as `runMe`; Once all setup is complete, the below is the expected project structure
