@@ -51,6 +51,13 @@ export default class Actor {
                         act.value = await storage.getValue(key);
                     }
                 }
+                if (act.text) {
+                    console.log(chalk.yellow(' Resolving value: ', chalk.bold('%s')), act.text);
+                    let key = await resolveValue(act.text);
+                    if(key){
+                        act.text = await storage.getValue(key);
+                    }
+                }
                 let element;
                 if (act.pause) {
                     console.log(chalk.yellow(' Pausing for ', chalk.bold('%s'), ' seconds'),

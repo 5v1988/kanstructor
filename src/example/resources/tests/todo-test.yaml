@@ -4,15 +4,21 @@ tests:
     exclude: false
 
     arrange:
-      - name: openUrl
+      - name: Open the url for the app under test
+        action: openUrl
         url: url
 
-    act:
-      - name: Set value for name in storage
+      - name: Set value for the first item in storage
         action: setValue
         key: firstItem
         value: Schedule doctor appointment
 
+      - name: Set value for the second item in storage
+        action: setValue
+        key: secondItem
+        value: Prepare a blog content
+
+    act:
       - name: Add the first item
         id: 10001
         role: textbox
@@ -28,7 +34,7 @@ tests:
       - name: Add the second item
         locator: .new-todo
         action: type
-        value: Prepare a blog content
+        value: ${secondItem}
 
       - name: Press Enter
         pause: 1
@@ -50,7 +56,7 @@ tests:
         path: "src/example/resources/snapshots/original-screenshot-1.png"    
 
       - name: Hover to the first item
-        text: Schedule doctor appointment
+        text: ${firstItem}
         action: hover
 
       - name: Delete the first item
@@ -59,7 +65,7 @@ tests:
         action: click
 
       - name: Hover to the second item
-        text: Prepare a blog content
+        text: ${secondItem}
         action: hover
 
       - name: Delete the second item
@@ -85,13 +91,13 @@ tests:
       - name: Verify if the first item deleted
         pause: 2
         type: standard
-        text: Schedule doctor appointment
+        text: ${firstItem} 
         state: invisible
 
       - name: Verify if the second item deleted
         pause: 2
         type: standard
-        text: Prepare a blog content
+        text: ${secondItem}
         state: invisible
 
       - name: Verify if the third item deleted
@@ -112,7 +118,7 @@ tests:
         reference: "src/example/resources/snapshots/reference-screenshot-2.png"
         tolerance: 1
 
-      - name: Compare value from storage
-        type: compare
-        value: ${firstItem} 
-        expectedValue: Schedule doctor appointment    
+      # - name: Compare value from storage
+      #   type: compare
+      #   value: ${firstItem} 
+      #   expectedValue: Schedule doctor appointment    

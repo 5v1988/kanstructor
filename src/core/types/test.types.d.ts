@@ -13,9 +13,12 @@ export interface Test {
 }
 
 export interface Arrange {
-  name: 'openUrl'
+  name: string
+  action: 'openUrl' | 'setValue'
   url: string
   pause?: number
+  key: string
+  value: string
 }
 
 export interface Act {

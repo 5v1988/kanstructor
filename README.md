@@ -54,14 +54,28 @@ npm run test
 
 - **Step 5** : All common configurations such as browser, env etc will have to be in the file: `config.yaml` under `config` folder. The following snippet shows some examples.
 
-
 	```yaml
 		browser: chrome
 		headless: false
 		device: Desktop Chrome
 		url: https://github.com/5v1988/kanstructor
 	```
+In addition, there is also a way to configure options required to perform visual comparison of snapshots, and the following snippet shows the basic configurations that are generally used. 
 
+  ```yaml
+  output:
+  errorColor:
+    red: 255
+    green: 0
+    blue: 0
+  errorType: movement #"flat" or "movement" or "flatDifferenceIntensity" or "movementDifferenceIntensity" or "diffOnly"
+  transparency: 0.3
+  largeImageThreshold: 1200
+  useCrossOrigin: false
+  returnEarlyThreshold: 0
+  scaleToSameSize: false
+  ignore: antialiasing # "nothing" or "less" or "antialiasing" or "colors" or "alpha";
+  ```
 — **Step 6** : Lastly, to run all tests, the test runner `runMe.js` needs to be created in the project as follows:
 
   ```js
@@ -81,6 +95,7 @@ Now execute tests using `node src/runMe.js` ( or `npm run test`) from command li
     ├── resources
     │   ├── config
     │   │   └── config.yaml
+    |   │   └── visual.tests.config.yaml
     │   ├── elements
     │   │   └── todo-element.yaml
     │   ├── reports
@@ -107,8 +122,19 @@ tests:
     exclude: false
 
     arrange:
-      - name: openUrl
+      - name: Open the url for the app under test
+        action: openUrl
         url: url
+
+      - name: Set value for the first item in storage
+        action: setValue
+        key: firstItem
+        value: Schedule doctor appointment
+
+      - name: Set value for the second item in storage
+        action: setValue
+        key: secondItem
+        value: Prepare a blog content
 
     act:
       - name: Add the first item
@@ -116,7 +142,7 @@ tests:
         role: textbox
         text: What needs to be done?
         action: type
-        value: Schedule doctor appointment
+        value: ${firstItem}
 
       - name: Press Enter
         pause: 1
@@ -126,7 +152,7 @@ tests:
       - name: Add the second item
         locator: .new-todo
         action: type
-        value: Prepare a blog content
+        value: ${secondItem}
 
       - name: Press Enter
         pause: 1
@@ -148,7 +174,7 @@ tests:
         path: "src/example/resources/snapshots/original-screenshot-1.png"    
 
       - name: Hover to the first item
-        text: Schedule doctor appointment
+        text: ${firstItem}
         action: hover
 
       - name: Delete the first item
@@ -157,7 +183,7 @@ tests:
         action: click
 
       - name: Hover to the second item
-        text: Prepare a blog content
+        text: ${secondItem}
         action: hover
 
       - name: Delete the second item
@@ -177,20 +203,20 @@ tests:
       - name: Screenshot after deleting all items
         pause: 1
         action: snapshot
-        path: "src/example/resources/snapshots/original-screenshot-2.png"     
+        path: "src/example/resources/snapshots/original-screenshot-2.png"
 
     assert:
       - name: Verify if the first item deleted
         pause: 2
         type: standard
-        text: Schedule doctor appointment
+        text: ${firstItem} 
         state: invisible
 
       - name: Verify if the second item deleted
         pause: 2
         type: standard
-        text: Prepare a blog content
-        state: visible
+        text: ${secondItem}
+        state: invisible
 
       - name: Verify if the third item deleted
         pause: 2
@@ -202,11 +228,13 @@ tests:
         type: snapshot
         original: "src/example/resources/snapshots/original-screenshot-1.png"
         reference: "src/example/resources/snapshots/reference-screenshot-1.png"
+        tolerance: 1
 
       - name: Compare screenshot after all items deleted
         type: snapshot
         original: "src/example/resources/snapshots/original-screenshot-2.png"
         reference: "src/example/resources/snapshots/reference-screenshot-2.png"
+        tolerance: 1  
 
  ```
 

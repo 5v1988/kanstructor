@@ -7,6 +7,7 @@ import chalk from 'chalk';
 import { delay } from "../lib/utils";
 import { Step } from "./types/report.types";
 import YAML from 'json-to-pretty-yaml';
+import storage from '../lib/storage.helper';
 
 export default class Arranger {
 
@@ -44,11 +45,15 @@ export default class Arranger {
                     arrange.pause);
             }
             try {
-                switch (arrange.name) {
+                switch (arrange.action) {
                     case 'openUrl':
                         if (arrange.url === 'url')
                             arrange.url = config.url;
                         await this.driver.goto(arrange.url);
+                        break;
+                    case 'setValue':
+                        let value = arrange.value;
+                        await storage.setValue(arrange.key, value);
                         break;
                 }
                 stepResult.result.status = 'passed';

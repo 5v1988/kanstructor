@@ -60,6 +60,13 @@ export default class Asserter {
                         assert.value = await storage.getValue(key);
                     }
                 }
+                if (assert.text) {
+                    console.log(chalk.yellow(' Resolving value: ', chalk.bold('%s')), assert.text);
+                    let key = await resolveValue(assert.text);
+                    if(key){
+                        assert.text = await storage.getValue(key);
+                    }
+                }
                 let element;
                 if (assert.pause) {
                     console.log(chalk.yellow('Pausing for ', chalk.bold('%s'), ' seconds'),
