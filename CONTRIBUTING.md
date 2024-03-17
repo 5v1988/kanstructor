@@ -9,7 +9,7 @@ To set up a development environment, please follow these steps:
 
 1. Clone the repo
     ```sh
-    git clone https://github.com/5v1988/dancing-yaml.git
+    git clone https://github.com/5v1988/kanstructor.git
     ```
 
 2. Install all necessary dependencies

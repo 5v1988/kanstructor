@@ -9,12 +9,10 @@
 
 ## Highlights
 
-- No programming
-- Very simple installation steps
-- Automated tests in plain Yaml
-- Visual regression tests in minutes
+- Hassle-free installation
+- Write your automated tests in plain Yaml
+- Design your visual regression tests in a matter of minutes
 - Browser compatibility checks
-- Designed for test engineers, product teams
 
 ## Installation
 
@@ -50,7 +48,7 @@ npm run test
 		home_logo: "a[href*='home']"
 	```
 
-- **Step 4** : The next step is, the folders `extracted-contents` and `snapshots` need to be created to save all contents extracted during testing to external files and to keep golden copies of screenshots that will be verified against app under tests during testing respectively.
+- **Step 4** : The next step is, the folders `extracted-contents` and `snapshots` need to be created to save all contents extracted during testing to external files and to keep baseline screenshots that will be verified against app under tests during testing respectively.
 
 - **Step 5** : All common configurations such as browser, env etc will have to be in the file: `config.yaml` under `config` folder. The following snippet shows some examples.
 
@@ -60,18 +58,23 @@ npm run test
 		device: Desktop Chrome
 		url: https://github.com/5v1988/kanstructor
 	```
-In addition, there is also a way to configure options required to perform visual comparison of snapshots, and the following snippet shows the basic configurations that are generally used. 
+In addition, there is also a way to configure options required to perform visual comparison of snapshots through the file `visual.tests.config.yaml` under `config` folder, and the following snippet shows the basic configurations that are generally used. 
 
-  ```yaml
+  ```yaml  
   output:
-  errorColor:
-    red: 255
-    green: 0
-    blue: 0
-  errorType: movement #"flat" or "movement" or "flatDifferenceIntensity" or "movementDifferenceIntensity" or "diffOnly"
-  transparency: 0.3
-  largeImageThreshold: 1200
-  useCrossOrigin: false
+    errorColor:
+      red: 255
+      green: 0
+      blue: 0
+    errorType: flat #"flat" or "movement" or "flatDifferenceIntensity" or "movementDifferenceIntensity" or "diffOnly"
+    transparency: 0.3
+    largeImageThreshold: 1200
+    useCrossOrigin: false
+    boundingBoxes:
+      - left: 0
+        top: 0
+        right: 1300
+        bottom: 800
   returnEarlyThreshold: 0
   scaleToSameSize: false
   ignore: antialiasing # "nothing" or "less" or "antialiasing" or "colors" or "alpha";
@@ -244,7 +247,9 @@ tests:
 
 — The high-level blocks — Arrange, Act and Assert, contain a sequence of steps to perform certain actions during testing.
 
-### Arrange Reference
+## Block Reference
+
+### Act
 
 <table>
   <tr>
@@ -550,7 +555,6 @@ tests:
 — [X] Browser <br>
 — [X] Summary report <br>
 — [O] Parameterized tests <br>
-— [O] API <br>
 — [O] Mobile <br>
 
 ## Contributing
