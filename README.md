@@ -40,25 +40,25 @@ npm run test
 - **Step 3** : Many a times, `CSS` and `XPath` values used to identify html elements will be used in several places across test files. To keep all such values in centralized place, the folder `elements` needs to be created within `resources`. Just like test files, the element files need to be ending in `*element.yaml` The following snippet shows some example element yaml.
 
 	```yaml
-		### Login page elements' xpath and css
+	### Login page elements' xpath and css
 
-		login_email: "[name='email']"
-		login_password: "[name='password']"
-		login_button: "//button[normalize-space()='Login']"
-		home_logo: "a[href*='home']"
+	login_email: "[name='email']"
+	login_password: "[name='password']"
+	login_button: "//button[normalize-space()='Login']"
+	home_logo: "a[href*='home']"
 	```
 
 - **Step 4** : The next step is, the folders `extracted-contents` and `snapshots` need to be created to save all contents extracted during testing to external files and to keep baseline screenshots that will be verified against app under tests during testing respectively.
 
 - **Step 5** : All common configurations such as browser, env etc will have to be in the file: `config.yaml` under `config` folder. The following snippet shows some examples.
 
-	```yaml
-		browser: chrome
-		headless: false
-		device: Desktop Chrome
-		url: https://github.com/5v1988/kanstructor
-	```
-In addition, there is also a way to configure options required to perform visual comparison of snapshots through the file `visual.tests.config.yaml` under `config` folder, and the following snippet shows the basic configurations that are generally used. 
+  ```yaml
+    browser: chrome
+    headless: false
+    device: Desktop Chrome
+    url: https://github.com/5v1988/kanstructor
+  ```
+  In addition, there is also a way to configure options required to perform visual comparison of snapshots through the file `visual.tests.config.yaml` under `config` folder, and the following snippet shows the basic configurations that are generally used. 
 
   ```yaml  
   output:
@@ -79,7 +79,7 @@ In addition, there is also a way to configure options required to perform visual
   scaleToSameSize: false
   ignore: antialiasing # "nothing" or "less" or "antialiasing" or "colors" or "alpha";
   ```
-— **Step 6** : Lastly, to run all tests, the test runner `runMe.js` needs to be created in the project as follows:
+- **Step 6** : Lastly, to run all tests, the test runner `runMe.js` needs to be created in the project as follows:
 
   ```js
     import runMe from 'kanstructor'
@@ -115,7 +115,7 @@ Now execute tests using `node src/runMe.js` ( or `npm run test`) from command li
 
 ## Write Tests
 
- — Tests are expected to be written in Yaml files, otherwise known as test files while using this package. Each of these tests should have to be written using well known testing format: `Arrange-Act-Assert`
+ — Tests are expected to be written in Yaml files, otherwise known as test files while using this package. Each of these tests should have to be written using 3 A's of testing: `Arrange-Act-Assert`
 
  ```yaml
 
@@ -240,12 +240,55 @@ tests:
         tolerance: 1  
 
  ```
+ ### Guidelines
 
  — A test file can have more than one test, however, our recommendation is to have a few of them, organized by some commonalities
 
  — A test folder `tests` can contain several test files; No limits
 
-— The high-level blocks — Arrange, Act and Assert, contain a sequence of steps to perform certain actions during testing.
+ — The high-level blocks — Arrange, Act and Assert, contain a sequence of steps to perform certain actions during testing.
+
+### Locating Strategy
+  To be updated
+
+### Reusing Blocks
+  By setting `id` for a test block, it will become reusable and can be used again within the same test or even in the test under the different yaml file. This is done using `refId` when needed.
+  ```yaml
+  - name: Add the first item
+    id: 10001
+    role: textbox
+    text: What needs to be done?
+    action: type
+    value: ${firstItem}
+  ```
+  In the above example, the `id` is set as `10001`. So, by using this id as `refId`, this test block can be re-used as follows:
+
+  ```yaml
+  - name: Add the third item
+    refId: 10001
+    value: Fix the air conditioner
+  ```
+  While doing so, all attributes except `name` and `value` will be taken up from the original test block. 
+
+### State management
+  Sometimes, the data values either static or dynamic will have to be shared among blocks. This can be achieved by setting such values with an action named `setValue` so they can be accessed later part of the tests using `${variableName}` or `$variableName`. 
+
+```yaml   
+- name: Set value for the first item in storage
+  action: setValue
+  key: firstItem
+  value: Schedule doctor appointment
+```
+
+As you can see from the above-illustrated example, the value for the key `firstItem` is set-up and the same value is accessed in two different places later as below.
+
+```yaml
+- name: Verify if the first item deleted
+  pause: 2
+  type: standard
+  text: ${firstItem} 
+  state: invisible
+```
 
 ## Block Reference
 
