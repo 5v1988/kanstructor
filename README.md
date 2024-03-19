@@ -1,6 +1,6 @@
 <h1 align="center">
 	<br>
-	<img width="480" src="src/media/dy-logo.svg" alt="Kanstructor">
+	<img width="480" src="src/assets/title-image.png" alt="Kanstructor">
 	<br>
 	<br>
 </h1>
@@ -13,6 +13,8 @@
 - Write your automated tests in plain Yaml
 - Design your visual regression tests in a matter of minutes
 - Browser compatibility checks
+
+https://github.com/5v1988/qa-playwright-ts/assets/demo-video.mov
 
 ## Installation
 
@@ -280,7 +282,7 @@ tests:
   value: Schedule doctor appointment
 ```
 
-As you can see from the above-illustrated example, the value for the key `firstItem` is set-up and the same value is accessed in two different places later as below.
+As you can see from this example, the value for the key `firstItem` is set-up once and it can be accessed anywhere else later with `text`(or `value`) later as shown below.
 
 ```yaml
 - name: Verify if the first item deleted
