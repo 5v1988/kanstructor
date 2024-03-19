@@ -5,16 +5,14 @@
 	<br>
 </h1>
 
-> Write, test and repeat using YAML syntax
+> Write, test and repeat using [YAML](https://spacelift.io/blog/yaml) language
 
 ## Highlights
 
 - Hassle-free installation
-- Write your automated tests in plain Yaml
-- Design your visual regression tests in a matter of minutes
-- Browser compatibility checks
-
-https://github.com/5v1988/qa-playwright-ts/assets/demo-video.mov
+- Write automated tests in plain Yaml
+- Design visual tests in a matter of minutes
+- Scale up browser compatibility checks
 
 ## Installation
 
@@ -295,7 +293,7 @@ As you can see from this example, the value for the key `firstItem` is set-up on
 
 ## Block Reference
 
-### Act
+### Arrange
 
 <table>
   <tr>
@@ -323,7 +321,7 @@ As you can see from this example, the value for the key `firstItem` is set-up on
 </table>
 
 
-### Act Reference
+### Act
 
 <table>
   <tr>
@@ -522,7 +520,7 @@ As you can see from this example, the value for the key `firstItem` is set-up on
 </table>
 
 
-### Assert Reference
+### Assert
 
 <table>
   <tr>
