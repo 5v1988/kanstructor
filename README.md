@@ -272,7 +272,7 @@ tests:
   While doing so, all attributes except `name` and `value` will be taken up from the original test block. 
 
 ### State management
-  Sometimes, the data values either static or dynamic will have to be shared among blocks. This can be achieved by setting such values with an action named `setValue` so they can be accessed later part of the tests using `${variableName}` or `$variableName`. 
+  Sometimes, the test data either static or dynamic will have to be shared among blocks. This can be achieved by setting such values with an action named `setValue` so they can be accessed later part of the tests using `${variableName}` or `$variableName`. 
 
 ```yaml   
 - name: Set value for the first item in storage
@@ -297,7 +297,7 @@ As you can see from this example, the value for the key `firstItem` is set-up on
 
 <table>
   <tr>
-    <th>Name</th>
+    <th>Action</th>
     <th>Description</th>
     <th>Keys</th>
     <th>Example</th>
@@ -318,8 +318,23 @@ As you can see from this example, the value for the key `firstItem` is set-up on
       </pre>  
     </td>
   </tr>
+  <tr>
+    <td><pre>setValue</pre></td>
+    <td>Set test data in value storage</td>
+    <td>Required — <br>
+      key,<br>
+      value<br>
+    </td>
+    <td>
+      <pre lang="yaml">
+        - name: Set value for the username
+          action: setValue
+          key: firstItem
+          value: 5v1988
+      </pre>  
+    </td>
+  </tr>
 </table>
-
 
 ### Act
 
@@ -494,9 +509,9 @@ As you can see from this example, the value for the key `firstItem` is set-up on
   <tr>
     <td>extract</td>
     <td>
-      Extract a text contents from the current window <br>
-      By default, Page source of the current window will be extracted <br>
-      Locator must also be given only if `extractType` is given
+      Extract text contents from the current window. <br>
+      Page source of the current window will be extracted by default<br>
+      and locator attribute is mandatory if `extractType` is given
     </td>
     <td>Required — <br>
       name,<br>
@@ -516,7 +531,23 @@ As you can see from this example, the value for the key `firstItem` is set-up on
           extractType: innerText
       </pre>
     </td>  
-  </tr>  
+  </tr>
+  <tr>
+    <td><pre>setValue</pre></td>
+    <td>Set test data in value storage</td>
+    <td>Required — <br>
+      key,<br>
+      value( or locator)<br>
+    </td>
+    <td>
+      <pre lang="yaml">
+        - name: Set value for the username
+          action: setValue
+          key: firstItem
+          value: 5v1988
+      </pre>  
+    </td>
+  </tr>
 </table>
 
 
@@ -530,14 +561,16 @@ As you can see from this example, the value for the key `firstItem` is set-up on
     <th>Example</th>
   </tr>
   <tr>
-    <td>element</td>
-    <td>Assert the expectation by having element(s) on the page</td>
+    <td>standard</td>
+    <td>Assert the expectation by using page element(s)</td>
     <td>Required — <br>
       name,<br>
       type,<br>
-      locator,<br>
-      state (Accepted values: visible, invisible, enabled, disabled, checked, unchecked, containText),<br>
-      text (Required only if state = containText)
+      locator, or (role or/and text)<br>
+      role (always used with 'text'),<br>
+      text,<br>
+      state (accepted values: visible, invisible,<br>
+      enabled, disabled, checked, unchecked, containText),<br>
       Optional — <br>
       pause
     </td>
@@ -552,22 +585,19 @@ As you can see from this example, the value for the key `firstItem` is set-up on
     </td>
   </tr>
   <tr>
-    <td>text</td>
-    <td>Verify if text displayed ( or not displayed)</td>
+    <td>compare</td>
+    <td>Assert if text matches with value storage</td>
     <td>Required — <br>
-      name,<br>
-      type,<br>
-      text,<br>
-      state (Accepted values: visible, invisible)
+      key,<br>
+      locator (or value or text),<br>
       Optional — <br>
       pause
     </td>
     <td>
       <pre lang="yaml">
-        - name: verify_upload
-          type: text
-          text: innerText.txt
-          state: 'visible'
+        - name: Compare username
+          key: ${username}
+          text: 5v1988
       </pre>
     </td>
   </tr>
@@ -578,7 +608,8 @@ As you can see from this example, the value for the key `firstItem` is set-up on
       name,<br>
       type,<br>
       original,<br>
-      reference<br>
+      reference,<br>
+      tolerance (lies between 0 and 100)<br>
       Optional — <br>
       pause
     </td>
@@ -588,6 +619,7 @@ As you can see from this example, the value for the key `firstItem` is set-up on
           type: snapshot
           original: "path/to/screenshot.png"
           reference: "path/to/reference.png"
+          tolerance: 1
       </pre>
     </td>
   </tr>
