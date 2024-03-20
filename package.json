@@ -1,6 +1,6 @@
 {
   "name": "kanstructor",
-  "version": "1.0.0-RC1",
+  "version": "1.0.0-RC2",
   "description": "An intuitively designed npm package for codeless automated testing",
   "main": "dist/main.js",
   "type": "module",

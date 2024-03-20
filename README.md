@@ -9,10 +9,10 @@
 
 ## Highlights
 
-- Hassle-free installation
 - Write automated tests in plain Yaml
 - Design visual tests in a matter of minutes
 - Scale up browser compatibility checks
+- Of course, hassle-free installation
 
 ## Installation
 
