@@ -30,7 +30,7 @@ In order to run the tests, the following command does the job:
 cd demo-project
 npm run test
 ```
-[demo-video.webm](https://github.com/5v1988/kanstructor/assets/123231872/72a88cec-8c80-455d-98d9-253dc91e825d)
+https://github.com/5v1988/kanstructor/assets/123231872/c6c01377-80ed-49eb-bd9c-59e5156a4c48
 
 ## Quick Start
 
