@@ -44,7 +44,7 @@ export interface Assert {
   type: 'standard' | 'snapshot' | 'compare'
   pause?: number
   locator: string
-  role: 'textbox' | 'checkbox' | 'radio' | 'link' | 'option'
+  role: 'textbox' | 'checkbox' | 'radio' | 'link' | 'option' | 'button' | 'slider' | 'switch'
   text: string
   value: string
   expectedValue: string

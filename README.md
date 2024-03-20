@@ -22,7 +22,7 @@
 npx setup-kanstructor demo-project
 ```
 
-Running the above command automatically sets up project structure, along with example files. [This section](#quick-start) provides the details on how the project resources are organised.
+Running the above command automatically sets up project structure, along with example files. [This section](#quick-start) provides the details on how the project resources are organised. Note that running this command also requires you to have `git` installed , if not install from [here](https://github.com/git-guides/install-git).
 
 In order to run the tests, the following command does the job:
 
@@ -250,7 +250,26 @@ tests:
  — The high-level blocks — Arrange, Act and Assert, contain a sequence of steps to perform certain actions during testing.
 
 ### Locating Strategy
-  To be updated
+  This package allows to locate page elements using their accessible name and implicit role. For instance, in the below example, the textbox is located using its placeholder text `What needs to be done?`.
+  ```yaml
+  - name: Add the first item
+    id: 10001
+    role: textbox
+    text: What needs to be done?
+    action: type
+    value: ${firstItem}
+  ```
+  It's also important to that `role` must always go with `text`, and at the moment, the other supported roles are as follows:
+  - textbox
+  - checkbox
+  - radio
+  - link
+  - option
+  - button
+  - slider
+  - switch
+
+  Alternatively, If you are well versed in writing `Xpath` or `CSS`, you can simply use `locator` attribute in the blocks.
 
 ### Reusing Blocks
   By setting `id` for a test block, it will become reusable and can be used again within the same test or even in the test under the different yaml file. This is done using `refId` when needed.
@@ -550,7 +569,6 @@ As you can see from this example, the value for the key `firstItem` is set-up on
   </tr>
 </table>
 
-
 ### Assert
 
 <table>
@@ -609,7 +627,7 @@ As you can see from this example, the value for the key `firstItem` is set-up on
       type,<br>
       original,<br>
       reference,<br>
-      tolerance (lies between 0 and 100)<br>
+      tolerance (lies between 0 (to be exact) and 100 (ignore comparison))<br>
       Optional — <br>
       pause
     </td>
@@ -658,3 +676,5 @@ https://discord.gg/GWfMu5Cwq6
 This project is licensed under the **GPLv3 license**.
 
 See [LICENSE](LICENSE) for more information.
+
+Happy Testing!
