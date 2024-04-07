@@ -1,6 +1,6 @@
 {
   "name": "kanstructor",
-  "version": "1.0.0-RC2",
+  "version": "1.0.0-RC3",
   "description": "An intuitively designed npm package for codeless automated testing",
   "main": "dist/main.js",
   "type": "module",
@@ -28,8 +28,10 @@
   "license": "ISC",
   "dependencies": {
     "@playwright/test": "^1.40.1",
+    "axios": "^1.6.8",
     "chalk": "4.1.2",
     "cucumber-html-reporter": "^6.0.0",
+    "formdata-node": "^6.0.3",
     "glob": "^10.3.10",
     "json-to-pretty-yaml": "^1.2.2",
     "playwright-core": "^1.40.1",

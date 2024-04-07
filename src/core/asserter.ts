@@ -7,6 +7,9 @@ import { Step } from "./types/report.types";
 import YAML from 'json-to-pretty-yaml';
 import { getVisualComparisonConfigurations } from "../lib/common.helper";
 import storage from '../lib/storage.helper';
+import axios from "axios";
+import { FormData } from "formdata-node"
+import { fileFromPath } from 'formdata-node/file-from-path'
 
 export default class Asserter {
     private static readonly VISUAL_CONFIG_PATH = '**/resources/**/visual.tests.config.{yaml,yml}';
@@ -37,7 +40,7 @@ export default class Asserter {
             return [];
 
         for (const assert of this.asserts) {
-            let hasError: boolean = false;
+            //let hasError: boolean = false;
             const stepResult: Step = {
                 name: `— ${assert.name}  `,
                 keyword: 'Assert ',
@@ -56,14 +59,14 @@ export default class Asserter {
                 if (assert.value) {
                     console.log(chalk.yellow(' Resolving value: ', chalk.bold('%s')), assert.value);
                     let key = await resolveValue(assert.value);
-                    if(key){
+                    if (key) {
                         assert.value = await storage.getValue(key);
                     }
                 }
                 if (assert.text) {
                     console.log(chalk.yellow(' Resolving value: ', chalk.bold('%s')), assert.text);
                     let key = await resolveValue(assert.text);
-                    if(key){
+                    if (key) {
                         assert.text = await storage.getValue(key);
                     }
                 }
@@ -123,6 +126,19 @@ export default class Asserter {
                         });
                         expect(diff.rawMisMatchPercentage <= assert.tolerance).toBeTruthy();
                         break;
+                    case 'glancing':
+                        const form = new FormData()
+                        form.append("images", await fileFromPath(assert.original));
+                        form.append("images", await fileFromPath(assert.reference));
+                        const response = await axios.post('https://www.qualityplus.io/api/glance',
+                            form, {
+                            params: {
+                                threshold: assert.tolerance
+                            }
+                        });
+                        console.log(`Response from OpenCV API: `, response.data);
+                        expect(response.data.match).toBeTruthy();
+                        break;
                     case 'compare':
                         let actualValue = assert.value;
                         expect(actualValue).toEqual(assert.expectedValue);
@@ -148,6 +164,8 @@ export default class Asserter {
                 stepResult.result.status = 'failed';
                 console.log(chalk.red('Unexpected failure@step:', chalk.bold.bgYellow.white('%s'),
                     ' Time to take a closer look!'), assert.name);
+                console.log(chalk.red('Exception name:', chalk.bold.bgYellow.white('%s'))
+                    , error);
             }
             const elaspedTime = new Date().getTime() - startTime;
             stepResult.result.duration = elaspedTime;

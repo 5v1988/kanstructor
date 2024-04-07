@@ -41,7 +41,7 @@ export interface Assert {
   name: string
   id: number
   refId: number
-  type: 'standard' | 'snapshot' | 'compare'
+  type: 'standard' | 'snapshot' | 'compare' | 'glancing'
   pause?: number
   locator: string
   role: 'textbox' | 'checkbox' | 'radio' | 'link' | 'option' | 'button' | 'slider' | 'switch'
