@@ -11,6 +11,7 @@
 
 - Write automated tests in plain Yaml
 - Design visual tests in a matter of minutes
+- Use OpenCV and/or Bitmap comparison to perform visual tests
 - Scale up browser compatibility checks
 - Of course, hassle-free installation
 
@@ -234,11 +235,12 @@ tests:
         reference: "src/example/resources/snapshots/reference-screenshot-1.png"
         tolerance: 1
 
-      - name: Compare screenshot after all items deleted
-        type: snapshot
+  # Visual comparison using OpenCV
+      - name: Compare screenshot after all items deleted by OpenCV
+        type: glancing
         original: "src/example/resources/snapshots/original-screenshot-2.png"
         reference: "src/example/resources/snapshots/reference-screenshot-2.png"
-        tolerance: 1  
+        tolerance: 3
 
  ```
  ### Guidelines

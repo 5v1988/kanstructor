@@ -116,9 +116,4 @@ tests:
         type: glancing
         original: "src/example/resources/snapshots/original-screenshot-2.png"
         reference: "src/example/resources/snapshots/reference-screenshot-2.png"
-        tolerance: 3
-
-      # - name: Compare value from storage
-      #   type: compare
-      #   value: ${firstItem} 
-      #   expectedValue: Schedule doctor appointment    
+        tolerance: 3 
